@@ -1,0 +1,283 @@
+import os
+
+# O NOME DO ARQUIVO HTML DA NOSSA FICHA
+NOME_ARQUIVO = "ficha.html"
+
+# O CONTEÚDO HTML COMPLETO DA FICHA
+# (Note como ele linka para o seu 'style.css' existente)
+HTML_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Protagonista | Sistema Herói</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="body-ficha">
+
+    <main class="main-ficha">
+        <form class="ficha-container">
+            
+            <header class="ficha-header">
+                <h1>FICHA DE PROTAGONISTA</h1>
+                <div class="identidade-grid">
+                    <div class="field-box">
+                        <input type="text" id="nome_protagonista">
+                        <label for="nome_protagonista">Nome do Protagonista</label>
+                    </div>
+                    <div class="field-box">
+                        <input type="text" id="identidade_secreta">
+                        <label for="identidade_secreta">Identidade Secreta</label>
+                    </div>
+                    <div class="field-box">
+                        <input type="text" id="matriz_poder">
+                        <label for="matriz_poder">Matriz de Poder</label>
+                    </div>
+                    <div class="field-box-small">
+                        <input type="number" id="np" value="1">
+                        <label for="np">NP</label>
+                    </div>
+                </div>
+            </header>
+
+            <aside class="coluna-esquerda">
+                
+                <section class="bloco" id="bloco-atributos">
+                    <h3>ATRIBUTOS</h3>
+                    <div class="atributo-box">
+                        <label for="forca">FORÇA</label>
+                        <input type="number" id="forca" class="attr-valor" value="10">
+                        <input type="text" id="forca_mod" class="attr-mod" value="+0">
+                    </div>
+                    <div class="atributo-box">
+                        <label for="destreza">DESTREZA</label>
+                        <input type="number" id="destreza" class="attr-valor" value="10">
+                        <input type="text" id="destreza_mod" class="attr-mod" value="+0">
+                    </div>
+                    <div class="atributo-box">
+                        <label for="constituicao">CONSTITUIÇÃO</label>
+                        <input type="number" id="constituicao" class="attr-valor" value="10">
+                        <input type="text" id="constituicao_mod" class="attr-mod" value="+0">
+                    </div>
+                    <div class="atributo-box">
+                        <label for="inteligencia">INTELIGÊNCIA</label>
+                        <input type="number" id="inteligencia" class="attr-valor" value="10">
+                        <input type="text" id="inteligencia_mod" class="attr-mod" value="+0">
+                    </div>
+                    <div class="atributo-box">
+                        <label for="sabedoria">SABEDORIA</label>
+                        <input type="number" id="sabedoria" class="attr-valor" value="10">
+                        <input type="text" id="sabedoria_mod" class="attr-mod" value="+0">
+                    </div>
+                    <div class="atributo-box">
+                        <label for="carisma">CARISMA</label>
+                        <input type="number" id="carisma" class="attr-valor" value="10">
+                        <input type="text" id="carisma_mod" class="attr-mod" value="+0">
+                    </div>
+                </section>
+                
+                <section class="bloco" id="bloco-pericias">
+                    <h3>PERÍCIAS</h3>
+                    <ul class="pericias-lista">
+                        <li><input type="checkbox"> <input type="text" value="+0"> Acrobacia (DES)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Arcanismo (INT)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Atletismo (FOR)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Atuação (CAR)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Enganação (CAR)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Furtividade (DES)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> História (INT)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Intimidação (CAR)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Intuição (SAB)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Investigação (INT)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Lidar com Animais (SAB)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Medicina (SAB)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Natureza (INT)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Percepção (SAB)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Persuasão (CAR)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Prestidigitação (DES)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Religião (INT)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Sobrevivência (SAB)</li>
+                        <li><input type="checkbox"> <input type="text" value="+0"> Tecnologia (INT)</li>
+                    </ul>
+                </section>
+            </aside>
+
+            <section class="coluna-central">
+                
+                <section class="bloco-horizontal-grid">
+                    <div class="bloco" id="bloco-defesas">
+                        <h3>DEFESAS</h3>
+                        <div class="defesa-item">
+                            <input type="text" id="fortitude" value="10">
+                            <label for="fortitude">Fortitude (10+CON)</label>
+                        </div>
+                        <div class="defesa-item">
+                            <input type="text" id="defesa" value="10">
+                            <label for="defesa">Defesa (10+DES)</label>
+                        </div>
+                        <div class="defesa-item">
+                            <input type="text" id="vontade" value="10">
+                            <label for="vontade">Vontade (10+SAB)</label>
+                        </div>
+                    </div>
+                    
+                    <div class="bloco" id="bloco-combate-rapido">
+                        <div class="defesa-item">
+                            <input type="text" id="iniciativa" value="+0">
+                            <label for="iniciativa">Iniciativa</label>
+                        </div>
+                        <div class="defesa-item">
+                            <input type="text" id="deslocamento" value="9m">
+                            <label for="deslocamento">Deslocamento</label>
+                        </div>
+                        <div class="defesa-item">
+                            <input type="text" id="bonus_prof" value="+2">
+                            <label for="bonus_prof">Bónus de Proficiência</label>
+                        </div>
+                    </div>
+                    
+                    <div class="bloco" id="bloco-trilha">
+                        <h3>TRILHA DE CONDIÇÃO</h3>
+                        <ul class="trilha-lista">
+                            <li><input type="radio" name="trilha" id="trilha-fresco" checked> <label for="trilha-fresco">Fresco</label></li>
+                            <li><input type="radio" name="trilha" id="trilha-ferido"> <label for="trilha-ferido">Ferido (-1 rolagens)</label></li>
+                            <li><input type="radio" name="trilha" id="trilha-machucado"> <label for="trilha-machucado">Machucado (-3 rolagens, 1/2 veloc.)</label></li>
+                            <li><input type="radio" name="trilha" id="trilha-incapacitado"> <label for="trilha-incapacitado">Incapacitado (Fora de combate)</label></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="bloco" id="bloco-vontade">
+                    <h3>PODERES À VONTADE (Nível 0)</h3>
+                    <textarea>
+- Rajada Simples (1 Ação, 18m, 1d8 dano)
+- Arpéu Mecânico (1 Ação Bónus, 9m movimento)
+- ...
+                    </textarea>
+                </section>
+
+                <section class="bloco" id="bloco-espacos">
+                    <h3>ESPAÇOS DE PODER (Recarga Longa)</h3>
+                    <div class="espacos-grid">
+                        <div class="espaco-nivel">
+                            <label>Nv. 1 (Total: <input type="text" value="3">)</label>
+                            <div class="slots">
+                                <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox">
+                            </div>
+                        </div>
+                        <div class="espaco-nivel">
+                            <label>Nv. 2 (Total: <input type="text">)</label>
+                            <div class="slots">
+                                <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox">
+                            </div>
+                        </div>
+                        <div class="espaco-nivel">
+                            <label>Nv. 3 (Total: <input type="text">)</label>
+                            <div class="slots">
+                                <input type="checkbox"> <input type="checkbox"> <input type="checkbox"> <input type="checkbox">
+                            </div>
+                        </div>
+                        <div class="espaco-nivel">
+                            <label>Nv. 4 (Total: <input type="text">)</label>
+                            <div class="slots">
+                                <input type="checkbox"> <input type="checkbox"> <input type="checkbox">
+                            </div>
+                        </div>
+                        <div class="espaco-nivel">
+                            <label>Nv. 5 (Total: <input type="text">)</label>
+                            <div class="slots">
+                                <input type="checkbox"> <input type="checkbox">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <aside class="coluna-direita">
+                <section class="bloco">
+                    <h3>COMPLICAÇÕES</h3>
+                    <textarea>
+- Identidade Secreta
+- Vulnerabilidade (Kryptonita)
+- Código de Honra (Não Matar)
+                    </textarea>
+                </section>
+                <section class="bloco">
+                    <h3>COMPLICAÇÕES DE COMBATE</h3>
+                    <textarea>
+(Anote aqui penalidades temporárias)
+- Braço Ferido
+- Atordoado
+                    </textarea>
+                </section>
+                <section class="bloco">
+                    <h3>EQUIPAMENTO</h3>
+                    <textarea>
+- Traje (Núcleo de Poder)
+- Comunicador
+- ...
+                    </textarea>
+                </section>
+                <section class="bloco">
+                    <h3>GESTÃO DE PC</h3>
+                    <textarea>
+PC Iniciais: 100
+PC de Complicações: +___
+PC Totais: ___
+PC Gastos: ___
+-------------------
+PC Guardados: ___
+                    </textarea>
+                </section>
+            </aside>
+
+            <footer class="ficha-footer">
+                <h2>LIVRO DE PODERES (Poderes de Esforço Aprendidos)</h2>
+                <div class="livro-poderes">
+                    <div class="poder-slot">
+                        <input type="text" class="poder-nome" placeholder="Nome do Poder (Ex: Rajada Destrutiva)">
+                        <input type="text" class="poder-nivel" placeholder="Nv. 1">
+                        <input type="text" class="poder-custo" placeholder="10 PC">
+                        <textarea class="poder-desc" placeholder="Ativação: 1 Ação. Alcance: 24m. Duração: Instantâneo. Causa 3d10 dano (INT) e empurra 3m. Upcast: +1d10 por Nível de Espaço."></textarea>
+                    </div>
+                    <div class="poder-slot">
+                        <input type="text" class="poder-nome" placeholder="Nome do Poder (Ex: Escudo de Energia)">
+                        <input type="text" class="poder-nivel" placeholder="Nv. 1">
+                        <input type="text" class="poder-custo" placeholder="10 PC">
+                        <textarea class="poder-desc" placeholder="Ativação: 1 Reação. Alcance: Pessoal. Duração: 1 rodada. Ganha +5 em todas as Defesas."></textarea>
+                    </div>
+                    <div class="poder-slot">
+                        <input type="text" class="poder-nome" placeholder="Nome do Poder">
+                        <input type="text" class="poder-nivel" placeholder="Nv. __">
+                        <input type="text" class="poder-custo" placeholder="___ PC">
+                        <textarea class="poder-desc" placeholder="Descrição do poder..."></textarea>
+                    </div>
+                </div>
+            </footer>
+
+        </form>
+    </main>
+</body>
+</html>
+"""
+
+def criar_ficha_html():
+    """
+    Gera um arquivo HTML (ficha.html) com a ficha de personagem
+    pronta para ser aberta no navegador e impressa.
+    """
+    try:
+        with open(NOME_ARQUIVO, "w", encoding="utf-8") as f:
+            f.write(HTML_TEMPLATE)
+        
+        print(f"Sucesso! A ficha foi criada em: {os.path.abspath(NOME_ARQUIVO)}")
+        print("Abra este arquivo no seu navegador (Chrome, Firefox, etc.) para usá-lo ou imprimi-lo.")
+    
+    except Exception as e:
+        print(f"Erro ao criar o arquivo: {e}")
+
+# --- Ponto de Entrada do Script ---
+if __name__ == "__main__":
+    print("A criar ficha de personagem (ficha.html) para a Edição 1.2...")
+    criar_ficha_html()
