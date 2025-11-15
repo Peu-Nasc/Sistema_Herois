@@ -1,6 +1,6 @@
 /* ---
    ARQUIVO: style.css
-   Descrição: Folha de Estilo Global para o Sistema de Heróis (Edição 1.2)
+   Descrição: Folha de Estilo Global para o Sistema de Heróis (Edição 1)
    --- */
 
 /* --- 1. RESET BÁSICO E TEMA DARK --- */
@@ -157,6 +157,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     display: flex;
     align-items: center;
     margin-left: 1rem;
+    flex-shrink: 0; /* Impede que o botão encolha */
 }
 .poder-card-stats {
     display: flex;
@@ -239,6 +240,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     color: #fff;
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
+    white-space: nowrap; /* Impede que o texto do botão quebre */
 }
 .btn-add:hover { background-color: #00aaff; }
 

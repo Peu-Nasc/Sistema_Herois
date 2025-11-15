@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. BANCO DE DADOS DO SISTEMA (EDIÇÃO 1.2 - COMPLETO Nv 0/1) ---
+    // --- 2. BANCO DE DADOS DO SISTEMA (EDIÇÃO 1 - 40 PC + 3 Grátis) ---
+    // (Este banco de dados está completo com as 5 Matrizes Nv 0/1)
     const DADOS_SISTEMA = {
         matrizes: {
             tecnologo: {
@@ -26,38 +27,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 atributoPrimario: "Inteligência",
                 habilidadesIniciais: ["Proficiência TR: Inteligência, Constituição.", "Perícias: Escolha 3 (Investigação, Tecnologia, Percepção, Intuição, Furtividade).", "Núcleo de Poder: Seus poderes estão ligados a um item que pode ser desativado."],
                 poderes: [
-                    // --- Nível 0 (À Vontade / Passivo) ---
+                    // --- Nível 0 (À Vontade / Passivo) - Custo 0 PC ---
                     {
-                        id: 'tec_vontade_rajada', nome: 'Rajada Simples', tipo: 'À Vontade', nivel: 0, custo_pc: 10,
+                        id: 'tec_vontade_rajada', nome: 'Rajada Simples', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação', alcance: '18 metros', duracao: 'Instantâneo',
                         desc: ["Você dispara um raio de energia de baixa potência.", "Faça um ataque à distância (com INT). Se acertar, causa 1d8 de dano de energia."],
-                        upcast: "Nenhum. Este é um poder à Vontade."
+                        upcast: "Nenhum."
                     },
                     {
-                        id: 'tec_passivo_interface', nome: 'Interface de Gadgets', tipo: 'Passivo', nivel: 0, custo_pc: 5,
+                        id: 'tec_passivo_interface', nome: 'Interface de Gadgets', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Você tem uma conexão inata com tecnologia.", "Você ganha Proficiência na perícia de Tecnologia. Se já for proficiente, ganha Vantagem em todos os testes de Tecnologia."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'tec_vontade_arpel', nome: 'Arpéu Mecânico', tipo: 'À Vontade', nivel: 0, custo_pc: 5,
+                        id: 'tec_vontade_arpel', nome: 'Arpéu Mecânico', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação Bónus', alcance: '9 metros', duracao: 'Instantâneo',
                         desc: ["Você dispara um gancho com um cabo retrátil.", "Você move-se até 9 metros em linha reta para um ponto que possa ver, sem provocar Ataques de Oportunidade."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'tec_passivo_armadura', nome: 'Armadura Leve', tipo: 'Passivo', nivel: 0, custo_pc: 15,
+                        id: 'tec_passivo_armadura', nome: 'Armadura Leve', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Seu traje ou implantes fornecem uma camada base de proteção.", "Você ganha um bónus de +1 na sua Defesa (Fortitude) e +1 na sua Defesa (baseada em DES)."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'tec_vontade_scan', nome: 'Scan Tático', tipo: 'À Vontade', nivel: 0, custo_pc: 5,
+                        id: 'tec_vontade_scan', nome: 'Scan Tático', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação Bónus', alcance: '18 metros', duracao: 'Instantâneo',
                         desc: ["Seu visor analisa um alvo.", "O Mestre informa-lhe uma Vulnerabilidade (Ex: 'Fogo') ou uma Resistência (Ex: 'Concussão') que o alvo possua."],
                         upcast: "Nenhum."
                     },
-                    // --- Nível 1 (Esforço) ---
+                    // --- Nível 1 (Esforço) - Custo em PC ---
                     {
                         id: 'tec_esforco_rajada_N1', nome: 'Rajada Destrutiva', tipo: 'Esforço', nivel: 1, custo_pc: 10,
                         ativacao: '1 Ação', alcance: '24 metros', duracao: 'Instantâneo',
@@ -114,38 +115,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 atributoPrimario: "Constituição",
                 habilidadesIniciais: ["Proficiência TR: Constituição, Força (ou Destreza).", "Perícias: Escolha 3 (Atletismo, Acrobacia, Intimidação, Percepção, Sobrevivência).", "Manifestação Inerente: Seu poder é biológico."],
                 poderes: [
-                    // --- Nível 0 (À Vontade / Passivo) ---
+                    // --- Nível 0 (À Vontade / Passivo) - Custo 0 PC ---
                     {
-                        id: 'mut_garr', nome: 'Garras', tipo: 'À Vontade', nivel: 0, custo_pc: 10,
+                        id: 'mut_garr', nome: 'Garras', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação', alcance: 'Corpo a corpo', duracao: 'Instantâneo',
                         desc: ["Suas mãos são armas.", "Faça um ataque corpo a corpo (pode usar FOR ou DES). Causa 1d10 de dano cortante."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'mut_pele', nome: 'Pele Blindada', tipo: 'Passivo', nivel: 0, custo_pc: 15,
+                        id: 'mut_pele', nome: 'Pele Blindada', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Sua pele é densa como rocha.", "Você ganha +2 na sua Defesa (Fortitude)."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'mut_instinto', nome: 'Instinto Primitivo', tipo: 'Passivo', nivel: 0, custo_pc: 5,
+                        id: 'mut_instinto', nome: 'Instinto Primitivo', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Seus sentidos são aguçados.", "Você tem Vantagem em testes de Sabedoria (Percepção) relacionados com audição ou olfato."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'mut_salto', nome: 'Salto Aprimorado', tipo: 'À Vontade', nivel: 0, custo_pc: 5,
+                        id: 'mut_salto', nome: 'Salto Aprimorado', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: 'Instantâneo',
                         desc: ["Você prepara os seus músculos.", "O seu deslocamento de salto (horizontal e vertical) é triplicado até o final do seu turno."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'mut_soco', nome: 'Soco Esmagador', tipo: 'À Vontade', nivel: 0, custo_pc: 10,
+                        id: 'mut_soco', nome: 'Soco Esmagador', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação', alcance: 'Corpo a corpo', duracao: 'Instantâneo',
                         desc: ["Um soco com força bruta.", "Faça um ataque corpo a corpo (FOR). Causa 1d8 de dano de concussão."],
                         upcast: "Nenhum."
                     },
-                    // --- Nível 1 (Esforço) ---
+                    // --- Nível 1 (Esforço) - Custo em PC ---
                     {
                         id: 'mut_esforco_cura_N1', nome: 'Fator de Cura Acelerado', tipo: 'Esforço', nivel: 1, custo_pc: 15,
                         ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: '1 minuto',
@@ -202,9 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 atributoPrimario: "Sabedoria ou Carisma",
                 habilidadesIniciais: ["Proficiência TR: Sabedoria, Carisma.", "Perícias: Escolha 3 (Arcanismo, Religião, História, Intuição, Persuasão).", "Sentido Arcano: Pode sentir a presença de magia ou poderes (Ação)."],
                 poderes: [
-                    // --- Nível 0 (À Vontade / Passivo) ---
+                    // --- Nível 0 (À Vontade / Passivo) - Custo 0 PC ---
                     {
-                        id: 'mis_vontade_raio', nome: 'Raio Místico', tipo: 'À Vontade', nivel: 0, custo_pc: 10,
+                        id: 'mis_vontade_raio', nome: 'Raio Místico', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação', alcance: '24 metros', duracao: 'Instantâneo',
                         desc: ["Um raio de energia é disparado.", "Faça um ataque à distância (com SAB ou CAR). Se acertar, causa 1d10 de dano (energia, fogo, etc.)."],
                         upcast: "Nenhum."
@@ -216,24 +217,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'mis_passivo_sentido', nome: 'Sentido Arcano', tipo: 'Passivo', nivel: 0, custo_pc: 5,
+                        id: 'mis_passivo_sentido', nome: 'Sentido Arcano', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Você sente passivamente a presença de magia forte ou perturbações dimensionais a 9m de si."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'mis_passivo_mente', nome: 'Mente Blindada', tipo: 'Passivo', nivel: 0, custo_pc: 10,
+                        id: 'mis_passivo_mente', nome: 'Mente Blindada', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["A sua mente é um labirinto.", "Você ganha +1 na sua Defesa (Vontade)."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'mis_vontade_ferramenta', nome: 'Ferramenta Mágica', tipo: 'À Vontade', nivel: 0, custo_pc: 5,
+                        id: 'mis_vontade_ferramenta', nome: 'Ferramenta Mágica', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: '10 minutos',
                         desc: ["Você conjura uma ferramenta simples (uma alavanca, uma chave) feita de energia mística. Não pode ser usada como arma."],
                         upcast: "Nenhum."
                     },
-                    // --- Nível 1 (Esforço) ---
+                    // --- Nível 1 (Esforço) - Custo em PC ---
                     {
                         id: 'mis_esforco_escudo_N1', nome: 'Escudo Arcano', tipo: 'Esforço', nivel: 1, custo_pc: 10,
                         ativacao: '1 Reação (quando é alvo de um ataque)', alcance: 'Pessoal', duracao: '1 rodada',
@@ -290,38 +291,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 atributoPrimario: "Destreza ou Sabedoria",
                 habilidadesIniciais: ["Proficiência TR: Destreza, Sabedoria.", "Perícias: Escolha 3 (Acrobacia, Atletismo, Percepção, Intuição, Furtividade).", "Sorte de Principiante: Uma vez por Descanso Longo, pode rolar novamente 1 falha."],
                 poderes: [
-                    // --- Nível 0 (À Vontade / Passivo) ---
+                    // --- Nível 0 (À Vontade / Passivo) - Custo 0 PC ---
                     {
-                        id: 'apr_vontade_impacto', nome: 'Impacto Acrobático', tipo: 'À Vontade', nivel: 0, custo_pc: 10,
+                        id: 'apr_vontade_impacto', nome: 'Impacto Acrobático', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação', alcance: 'Corpo a corpo', duracao: 'Instantâneo',
                         desc: ["Um ataque corpo a corpo ágil.", "Faça um ataque corpo a corpo (pode usar FOR ou DES). Causa 1d8 de dano de concussão."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'apr_passivo_andar', nome: 'Andar em Paredes', tipo: 'Passivo', nivel: 0, custo_pc: 10,
+                        id: 'apr_passivo_andar', nome: 'Andar em Paredes', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Você pode aderir a qualquer superfície.", "Você ganha um deslocamento de escalada igual ao seu deslocamento terrestre."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'apr_passivo_reflexos', nome: 'Reflexos Rápidos', tipo: 'Passivo', nivel: 0, custo_pc: 15,
+                        id: 'apr_passivo_reflexos', nome: 'Reflexos Rápidos', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Seus reflexos são sobre-humanos.", "Você ganha +2 na sua Defesa (baseada em DES)."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'apr_passivo_sentido', nome: 'Sentido de Perigo', tipo: 'Passivo', nivel: 0, custo_pc: 10,
+                        id: 'apr_passivo_sentido', nome: 'Sentido de Perigo', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Você tem um sexto sentido que o alerta.", "Você não pode ser Surpreendido e ganha +2 na sua Iniciativa."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'apr_vontade_desviar', nome: 'Desviar Projéteis', tipo: 'À Vontade', nivel: 0, custo_pc: 10,
+                        id: 'apr_vontade_desviar', nome: 'Desviar Projéteis', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Reação (quando atingido por ataque à distância)', alcance: 'Pessoal', duracao: 'Instantâneo',
                         desc: ["Você tenta aparar ou desviar de um projétil.", "Como reação, role 1d10 + mod. DES. Você reduz o dano do ataque por esse total."],
                         upcast: "Nenhum."
                     },
-                    // --- Nível 1 (Esforço) ---
+                    // --- Nível 1 (Esforço) - Custo em PC ---
                     {
                         id: 'apr_esforco_esquiva_N1', nome: 'Esquiva Sobrenatural', tipo: 'Esforço', nivel: 1, custo_pc: 10,
                         ativacao: '1 Reação (quando é alvo de um ataque)', alcance: 'Pessoal', duracao: '1 rodada',
@@ -378,38 +379,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 atributoPrimario: "Força ou Constituição",
                 habilidadesIniciais: ["Proficiência TR: Força, Constituição.", "Perícias: Escolha 3 (Atletismo, Intimidação, Percepção, Tecnologia, Arcanismo).", "Fisiologia Exótica: Resistência a veneno e não precisa respirar."],
                 poderes: [
-                    // --- Nível 0 (À Vontade / Passivo) ---
+                    // --- Nível 0 (À Vontade / Passivo) - Custo 0 PC ---
                     {
-                        id: 'ali_vontade_soco', nome: 'Soco Super-Sónico', tipo: 'À Vontade', nivel: 0, custo_pc: 10,
+                        id: 'ali_vontade_soco', nome: 'Soco Super-Sónico', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação', alcance: 'Corpo a corpo', duracao: 'Instantâneo',
                         desc: ["Você ataca com força alienígena.", "Faça um ataque corpo a corpo (FOR). Causa 1d8 de dano de concussão. Se você se moveu 6m antes do ataque, causa 1d10."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'ali_passivo_fisio', nome: 'Fisiologia Alienígena', tipo: 'Passivo', nivel: 0, custo_pc: 10,
+                        id: 'ali_passivo_fisio', nome: 'Fisiologia Alienígena', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Você não precisa de respirar e tem Resistência a dano de veneno e à condição Envenenado."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'ali_passivo_invul', nome: 'Invulnerabilidade (Menor)', tipo: 'Passivo', nivel: 0, custo_pc: 20,
+                        id: 'ali_passivo_invul', nome: 'Invulnerabilidade (Menor)', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Sua pele é quase impenetrável.", "Você ganha Resistência (meio dano) contra dano de concussão, cortante e perfurante de ataques não-mágicos e não-tecnológicos (Ex: balas, socos normais)."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'ali_passivo_sentidos', nome: 'Super-Sentidos', tipo: 'Passivo', nivel: 0, custo_pc: 5,
+                        id: 'ali_passivo_sentidos', nome: 'Super-Sentidos', tipo: 'Passivo', nivel: 0, custo_pc: 0,
                         ativacao: 'Passivo', alcance: 'Pessoal', duracao: 'Contínuo',
                         desc: ["Você pode ver e ouvir a distâncias incríveis.", "Você tem Vantagem em testes de Percepção (visão/audição)."],
                         upcast: "Nenhum."
                     },
                     {
-                        id: 'ali_vontade_sopro', nome: 'Sopro Ártico (Menor)', tipo: 'À Vontade', nivel: 0, custo_pc: 10,
+                        id: 'ali_vontade_sopro', nome: 'Sopro Ártico (Menor)', tipo: 'À Vontade', nivel: 0, custo_pc: 0,
                         ativacao: '1 Ação', alcance: 'Cone de 4.5m', duracao: 'Instantâneo',
                         desc: ["Você expele ar congelante.", "Inimigos na área devem fazer um TR de Constituição (CD 13). Se falharem, a sua velocidade é reduzida para metade por 1 rodada."],
                         upcast: "Nenhum."
                     },
-                    // --- Nível 1 (Esforço) ---
+                    // --- Nível 1 (Esforço) - Custo em PC ---
                     {
                         id: 'ali_esforco_visao_N1', nome: 'Visão de Calor', tipo: 'Esforço', nivel: 1, custo_pc: 10,
                         ativacao: '1 Ação', alcance: '24 metros', duracao: 'Instantâneo',
@@ -462,6 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         complicacoes: [
+            // --- MUDANÇA (Edição 1): Custo agora em "pc" ---
             { id: 'comp_id', nome: 'Identidade Secreta', pc: 5 },
             { id: 'comp_vul', nome: 'Vulnerabilidade (Comum - Ex: Kryptonita)', pc: 10 },
             { id: 'comp_vul_m', nome: 'Vulnerabilidade (Mágica)', pc: 10 },
@@ -479,11 +481,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let currentStep = 1;
         const totalSteps = 4;
-        let pcBase = 100;
+        let pcBase = 40; // --- MUDANÇA (Edição 1): PC Base é 40 ---
+        const maxNv0 = 3; // --- MUDANÇA (Edição 1): Máximo de 3 Nv. 0 Grátis ---
+
         let fichaAtual = {
             matriz: null,
-            np: 1, // Começa no Nível de Protagonista 1
-            poderes: {}, // Guarda os poderes comprados por ID
+            np: 1,
+            poderes: {},
             complicacoes: {}
         };
 
@@ -500,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function init() {
             ppTrackerContainer.innerHTML = `
                 <span class="pp-tracker">
-                    Pontos de Criação (PC) Restantes: <span id="pp-total">100</span>
+                    Pontos de Criação (PC) Restantes: <span id="pp-total">40</span>
                 </span>`;
             
             buildStep1();
@@ -534,45 +538,62 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!fichaAtual.matriz) return;
             const matriz = DADOS_SISTEMA.matrizes[fichaAtual.matriz];
             
-            // Filtra e agrupa os poderes por Nível
             const poderesPorNivel = {};
+            let nv0Count = 0;
+            
             for (const poder of matriz.poderes) {
-                // REGRA DE NP: Só mostra poderes que o herói pode aprender
-                if (poder.nivel <= fichaAtual.np) {
+                if (poder.nivel <= fichaAtual.np) { // Só mostra poderes de Nv 0 e 1
                     if (!poderesPorNivel[poder.nivel]) {
                         poderesPorNivel[poder.nivel] = [];
                     }
                     poderesPorNivel[poder.nivel].push(poder);
                 }
             }
+            // Conta quantos Nv 0 já foram escolhidos
+            for (const poder of Object.values(fichaAtual.poderes)) {
+                if (poder.nivel === 0) nv0Count++;
+            }
 
             divPoderesDisponiveis.innerHTML = '';
-            
-            // Define a ordem de exibição (Passivo/À Vontade, Nível 1, etc.)
             const ordemNiveis = Object.keys(poderesPorNivel).sort((a,b) => a - b);
             
             for (const nivel of ordemNiveis) {
-                // Adiciona um cabeçalho para o grupo de Nível
-                let nivelLabel = `Poderes de Nível ${nivel}`;
-                if (nivel == 0) nivelLabel = "Passivos & À Vontade (Nível 0)";
+                let nivelLabel = `Poderes de Esforço (Nível ${nivel})`;
+                if (nivel == 0) nivelLabel = `Passivos & À Vontade (Escolha ${maxNv0 - nv0Count} restantes)`;
+                
                 divPoderesDisponiveis.innerHTML += `<h3 class="power-level-header">${nivelLabel}</h3>`;
 
                 for (const poder of poderesPorNivel[nivel]) {
                     const poderNaFicha = fichaAtual.poderes[poder.id];
                     
+                    // --- MUDANÇA (Edição 1): Lógica dos botões ---
+                    let controlsHTML = '';
+                    if (poder.nivel === 0) {
+                        // Lógica para Nível 0 (Grátis, limite de 3)
+                        if (poderNaFicha) {
+                            controlsHTML = `<button class="btn btn-small btn-remove" data-id="${poder.id}">Remover</button>`;
+                        } else {
+                            controlsHTML = `<button class="btn btn-small btn-add" data-id="${poder.id}" ${nv0Count >= maxNv0 ? 'disabled' : ''}>Escolher (Grátis)</button>`;
+                        }
+                    } else {
+                        // Lógica para Nível 1 (Custo em PC)
+                        if (poderNaFicha) {
+                            controlsHTML = `<button class="btn btn-small btn-remove" data-id="${poder.id}">Remover</button>`;
+                        } else {
+                            controlsHTML = `<button class="btn btn-small btn-add" data-id="${poder.id}">Adicionar (Custo: ${poder.custo_pc} PC)</button>`;
+                        }
+                    }
+
                     divPoderesDisponiveis.innerHTML += `
                     <div class="poder-card-wizard ${poderNaFicha ? 'comprado' : ''}">
                         <div class="poder-card-header">
                             <strong>${poder.nome} (${poder.tipo})</strong>
                             <div class="item-poder-controls">
-                                ${poderNaFicha ? 
-                                    `<button class="btn btn-small btn-remove" data-id="${poder.id}">Remover</button>` : 
-                                    `<button class="btn btn-small btn-add" data-id="${poder.id}">Adicionar (Custo: ${poder.custo_pc} PC)</button>`
-                                }
+                                ${controlsHTML}
                             </div>
                         </div>
                         <div class="poder-card-stats">
-                            <span><strong>Custo (PC):</strong> ${poder.custo_pc}</span>
+                            <span><strong>Custo (PC):</strong> ${poder.custo_pc == 0 ? 'Grátis (Escolha)' : `${poder.custo_pc} PC`}</span>
                             <span><strong>Nível:</strong> ${poder.nivel} (${poder.tipo})</span>
                             <span><strong>Ativação:</strong> ${poder.ativacao}</span>
                         </div>
@@ -607,24 +628,26 @@ document.addEventListener('DOMContentLoaded', () => {
         
         /** (REFATORADO) Constrói o HTML para o Passo 4 (Revisão Final) */
         function buildStep4() {
-            if (!fichaAtual.matriz) {
-                divFichaFinal.innerHTML = '<p class="placeholder-text">Erro! Nenhuma Matriz selecionada. Volte ao Passo 1.</p>';
-                return;
-            }
-
+            if (!fichaAtual.matriz) return;
             const matriz = DADOS_SISTEMA.matrizes[fichaAtual.matriz];
             
-            let poderesHTML = '<ul>';
-            const poderesComprados = Object.values(fichaAtual.poderes);
-            if (poderesComprados.length > 0) {
-                poderesComprados.sort((a,b) => a.nivel - b.nivel || a.nome.localeCompare(b.nome));
-                for (const poder of poderesComprados) {
-                    poderesHTML += `<li><strong>${poder.nome}</strong> (Nível ${poder.nivel}, ${poder.tipo}) - Custo: ${poder.custo_pc} PC</li>`;
+            let poderesNv0HTML = '<ul>';
+            let poderesNv1HTML = '<ul>';
+            const poderesComprados = Object.values(fichaAtual.poderes).sort((a,b) => a.nivel - b.nivel || a.nome.localeCompare(b.nome));
+            let nv0Count = 0;
+            
+            for (const poder of poderesComprados) {
+                if (poder.nivel === 0) {
+                    poderesNv0HTML += `<li><strong>${poder.nome}</strong> (${poder.tipo})</li>`;
+                    nv0Count++;
+                } else {
+                    poderesNv1HTML += `<li><strong>${poder.nome}</strong> (Nível ${poder.nivel}) - Custo: ${poder.custo_pc} PC</li>`;
                 }
-            } else {
-                poderesHTML += '<li class="placeholder-text">Nenhum poder comprado.</li>';
             }
-            poderesHTML += '</ul>';
+            if (nv0Count === 0) poderesNv0HTML += '<li class="placeholder-text">Nenhum poder Nv. 0 escolhido.</li>';
+            if (poderesComprados.length === nv0Count) poderesNv1HTML += '<li class="placeholder-text">Nenhum poder Nv. 1 comprado.</li>';
+            poderesNv0HTML += '</ul>';
+            poderesNv1HTML += '</ul>';
 
             let compsHTML = '<ul>';
             if (Object.keys(fichaAtual.complicacoes).length > 0) {
@@ -644,22 +667,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 <ul class="habilidades-iniciais">
                     ${matriz.habilidadesIniciais.map(h => `<li>${h}</li>`).join('')}
                 </ul>
-                <h3>Poderes Aprendidos</h3>
-                ${poderesHTML}
+                <h3>Poderes Nível 0 Escolhidos (${nv0Count}/${maxNv0})</h3>
+                ${poderesNv0HTML}
+                <h3>Poderes de Esforço Aprendidos</h3>
+                ${poderesNv1HTML}
                 <h3>Complicações</h3>
                 ${compsHTML}
                 <hr style="margin: 1.5rem 0;">
                 <p><strong>RECURSOS DE JOGO (NP 1):</strong></p>
-                <p><strong>Pontos de Criação (PC) Gastos:</strong> ${pcGasto} / ${pcTotal}</p>
+                <p><strong>Pontos de Criação (PC) Gastos:</strong> ${pcGasto} / ${pcTotal} (PC Restantes: ${pcTotal - pcGasto})</p>
                 <p><strong>Espaços de Poder (Diários):</strong> 3 Espaços de Nível 1 (Recarregam num Descanso Longo)</p>
             `;
         }
 
         /** Mostra o passo desejado e esconde os outros */
         function showStep(stepNum) {
-            wizardContainer.querySelectorAll('.wizard-step').forEach(step => {
-                step.classList.remove('active');
-            });
+            wizardContainer.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
             document.getElementById(`step-${stepNum}`).classList.add('active');
             currentStep = stepNum;
 
@@ -678,9 +701,13 @@ document.addEventListener('DOMContentLoaded', () => {
         /** (REFATORADO) Recalcula e atualiza o total de PC */
         function updatePCTotal(returnOnly = false) {
             let custoPoderes = 0;
+            // --- MUDANÇA (Edição 1): Só conta o PC de poderes Nv 1+ ---
             for (const poder of Object.values(fichaAtual.poderes)) {
-                custoPoderes += poder.custo_pc;
+                if (poder.nivel > 0) {
+                    custoPoderes += poder.custo_pc;
+                }
             }
+            
             let bonusComplicacoes = 0;
             for (const comp of Object.values(fichaAtual.complicacoes)) {
                 bonusComplicacoes += comp.pc;
@@ -689,13 +716,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (returnOnly) return custoPoderes; // Usado pelo Resumo Final
 
             const pcRestante = pcBase + bonusComplicacoes - custoPoderes;
-            const pcTotalSpan = document.getElementById('pp-total'); // O ID ainda é pp-total no HTML
+            const pcTotalSpan = document.getElementById('pp-total');
             if(pcTotalSpan) {
                 pcTotalSpan.textContent = pcRestante;
                 pcTotalSpan.classList.toggle('negativo', pcRestante < 0);
                 // Atualiza o texto do tracker
                 ppTrackerContainer.querySelector('.pp-tracker').innerHTML = `Pontos de Criação (PC) Restantes: <span id="pp-total" class="${pcRestante < 0 ? 'negativo' : ''}">${pcRestante}</span>`;
             }
+            // Retorna o valor restante para a verificação
+            return pcRestante;
         }
         
         /** Chamada quando o jogador clica num card de Matriz */
@@ -704,31 +733,31 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!card) return;
             const matrizKey = card.dataset.matrizKey;
 
-            if (fichaAtual.matriz === matrizKey) return; // Não faz nada se clicar no mesmo
+            if (fichaAtual.matriz === matrizKey) return;
             
-            if (fichaAtual.matriz !== null && Object.keys(fichaAtual.poderes).length > 0) {
-                if (!confirm("Você tem a certeza? Mudar de Matriz irá limpar os seus poderes selecionados.")) {
+            if (fichaAtual.matriz !== null && (Object.keys(fichaAtual.poderes).length > 0 || Object.keys(fichaAtual.complicacoes).length > 0)) {
+                if (!confirm("Você tem a certeza? Mudar de Matriz irá limpar os seus poderes e complicações selecionados.")) {
                     return;
                 }
             }
 
             fichaAtual.matriz = matrizKey;
-            fichaAtual.poderes = {}; // Reseta poderes ao trocar de matriz
+            fichaAtual.poderes = {}; // Reseta poderes
+            fichaAtual.complicacoes = {}; // Reseta complicações
             
-            matrizSelectionContainer.querySelectorAll('.matriz-card').forEach(c => {
-                c.classList.remove('selected');
-            });
+            matrizSelectionContainer.querySelectorAll('.matriz-card').forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
 
             btnNext.disabled = false;
             
             updatePCTotal();
+            buildStep3(); // Reconstrói o passo 3 para desmarcar as checkboxes
         }
 
-        /** (REFATORADO) Chamada quando o jogador clica em Adicionar/Remover */
+        /** (REFATORADO E CORRIGIDO) Chamada quando o jogador clica em Adicionar/Remover */
         function handlePoderClick(e) {
             const button = e.target.closest('button.btn-add, button.btn-remove');
-            if (!button) return; // Ignora cliques que não são em botões
+            if (!button) return;
             
             const id = button.dataset.id;
             if (!id) return;
@@ -736,15 +765,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const dadosPoder = DADOS_SISTEMA.matrizes[fichaAtual.matriz].poderes.find(p => p.id === id);
             if (!dadosPoder) return;
 
+            // --- LÓGICA DE ADICIONAR ---
             if (button.classList.contains('btn-add')) {
-                // Adiciona o poder à ficha
+                if (dadosPoder.nivel === 0) {
+                    // Lógica para Nível 0 (Grátis, limite de 3)
+                    let nv0Count = 0;
+                    for (const poder of Object.values(fichaAtual.poderes)) {
+                        if (poder.nivel === 0) nv0Count++;
+                    }
+                    if (nv0Count >= maxNv0) {
+                        alert(`Você só pode escolher ${maxNv0} poderes de Nível 0 gratuitos.`);
+                        return;
+                    }
+                } else {
+                    // --- AQUI ESTÁ O BUGFIX (A GUARDA) ---
+                    // Lógica para Nível 1+ (Custo em PC)
+                    const pcRestante = updatePCTotal(); // Pega o PC atual
+                    if (dadosPoder.custo_pc > pcRestante) {
+                        alert("Pontos de Criação (PC) insuficientes para comprar este poder!");
+                        return; // Para a função aqui
+                    }
+                }
+                // Se passou nas guardas, adiciona o poder
                 fichaAtual.poderes[id] = { ...dadosPoder };
+
+            // --- LÓGICA DE REMOVER ---
             } else if (button.classList.contains('btn-remove')) {
-                // Remove o poder da ficha
                 delete fichaAtual.poderes[id];
             }
             
-            // Redesenha os cartões de poder
             buildStep2();
             updatePCTotal();
         }
@@ -756,6 +805,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = checkbox.dataset.id;
             const nome = checkbox.dataset.nome;
             const pc = parseInt(checkbox.dataset.pc);
+
+            // --- BUGFIX (GUARDA) ---
+            // Não deixa desmarcar uma complicação se isso for deixar o PC negativo
+            if (!checkbox.checked) {
+                const pcRestante = updatePCTotal();
+                if (pcRestante < pc) {
+                    alert("Você não pode remover esta complicação, pois já gastou os PC que ela fornece.");
+                    checkbox.checked = true; // Impede a desmarcação
+                    return;
+                }
+            }
 
             if (checkbox.checked) {
                 fichaAtual.complicacoes[id] = { id, nome, pc };
@@ -776,13 +836,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /** (REFATORADO) Constrói a página de Referência Estática (Capítulo 3) */
     function buildReferencePage() {
         const refContainer = document.getElementById('matrizes-referencia-completa');
-        if (!refContainer) return; // Não executa se não estiver na página 'jogador.html'
+        if (!refContainer) return;
 
-        refContainer.innerHTML = ''; // Limpa o "placeholder"
+        refContainer.innerHTML = '';
 
         for (const [key, matriz] of Object.entries(DADOS_SISTEMA.matrizes)) {
             
-            // 1. Agrupa os poderes por Nível
             const poderesPorNivel = {};
             for (const poder of matriz.poderes) {
                 if (!poderesPorNivel[poder.nivel]) {
@@ -800,11 +859,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 poderesHTML += `<h4 class="power-level-header">${nivelLabel}</h4>`;
 
                 for (const poder of poderesPorNivel[nivel]) {
+                    // --- MUDANÇA (Edição 1): Custo de PC na Referência ---
+                    let custoPC_texto = `<strong>Custo (PC):</strong> ${poder.custo_pc}`;
+                    if (poder.custo_pc === 0) {
+                        custoPC_texto = `<strong>Custo (PC):</strong> Gratuito (Escolha de Matriz)`;
+                    }
+
                     poderesHTML += `
                     <div class="poder-card-ref">
                         <div class="poder-card-header">
                             <strong>${poder.nome} (${poder.tipo})</strong>
-                            <span><strong>Custo (PC):</strong> ${poder.custo_pc}</span>
+                            <span>${custoPC_texto}</span>
                         </div>
                         <div class="poder-card-stats">
                             <span><strong>Custo (Ativação):</strong> ${poder.nivel == 0 ? '0 Espaços' : `1 Espaço Nv. ${poder.nivel}`}</span>
@@ -821,7 +886,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             
-            // 2. Constrói a entrada da Matriz
             refContainer.innerHTML += `
                 <article class="matriz-reference-entry">
                     <h3>${matriz.nome}</h3>
@@ -839,6 +903,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- RODA O CONSTRUTOR DA REFERÊNCIA ---
     buildReferencePage();
-
 
 }); // Fim do 'DOMContentLoaded'
