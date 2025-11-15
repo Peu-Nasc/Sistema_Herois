@@ -1,7 +1,7 @@
 // Aguarda o HTML carregar
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. LÓGICA DAS ABAS (TABS) E MENU POPUP (NOVO) ---
+    // --- 1. LÓGICA DAS ABAS (TABS) E MENU POPUP ---
     const subNav = document.getElementById('sub-nav-jogador');
     const contentSections = document.querySelectorAll('.content-section');
     const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -9,28 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (subNav) {
         subNav.addEventListener('click', (e) => {
-            // Só ativa se clicar num botão de aba
             if (!e.target.classList.contains('sub-nav-btn')) return;
-
             const targetId = e.target.dataset.target;
-            
-            // Atualiza botões
             subNav.querySelectorAll('.sub-nav-btn').forEach(btn => btn.classList.remove('active'));
             e.target.classList.add('active');
-
-            // Atualiza conteúdo
             contentSections.forEach(section => {
                 section.classList.toggle('active', section.id === targetId);
             });
-            
-            // (NOVO) Fecha o menu popup após clicar numa aba
             if (window.innerWidth <= 768) {
                 subNav.classList.remove('open');
             }
         });
     }
-
-    // (NOVO) Lógica do Menu Hambúrguer
     if (hamburgerBtn) {
         hamburgerBtn.addEventListener('click', () => {
             subNav.classList.add('open');
@@ -42,8 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. BANCO DE DADOS DO SISTEMA (EDIÇÃO 1 - 40 PC + 3 Grátis) ---
-    // (Este banco de dados está completo com as 5 Matrizes Nv 0/1)
+    // --- 2. BANCO DE DADOS DO SISTEMA (EDIÇÃO 1 - COMPLETO Nv 0, 1, 2) ---
     const DADOS_SISTEMA = {
         matrizes: {
             tecnologo: {
@@ -132,6 +121,56 @@ document.addEventListener('DOMContentLoaded', () => {
                         desc: ["Você injeta nanobots.", "O alvo (que não pode ser um construto) sobe 1 Nível na Trilha de Condição (Ex: de 'Machucado' para 'Ferido')."],
                         upcast: "O alvo sobe +1 Nível adicional na Trilha por cada Nível de Espaço acima do 1º."
                     },
+                    
+                    // --- Nível 2 (Esforço) - Custo em PC ---
+                    {
+                        id: 'tec_esforco_voo_N2', nome: 'Modo de Voo', tipo: 'Esforço', nivel: 2, custo_pc: 15,
+                        ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: 'Concentração (10 minutos)',
+                        desc: ["Você ativa os seus propulsores.", "Você ganha um deslocamento de voo de 18 metros."],
+                        upcast: "Se usar um Espaço de Nv. 3, a duração torna-se 1 hora."
+                    },
+                    {
+                        id: 'tec_esforco_armadura_N2', nome: 'Armadura de Batalha', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: '1 hora',
+                        desc: ["Você desvia energia para placas de armadura extra.", "Você ganha +3 na sua Defesa (Fortitude) e +1 na sua Defesa (Vontade) durante 1 hora. Este poder não acumula com `Armadura Leve`."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'tec_esforco_raio_N2', nome: 'Raio Paralisante', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação', alcance: '18 metros', duracao: 'Concentração (1 minuto)',
+                        desc: ["Você dispara um raio de energia estática.", "O alvo deve fazer um TR de Constituição (CD 8 + Prof + Mod. INT). Se falhar, fica Paralisado. O alvo pode repetir o TR no final de cada turno dele."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'tec_esforco_drone_N2', nome: 'Drone de Vigilância', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: '1 km', duracao: 'Concentração (10 minutos)',
+                        desc: ["Você lança um pequeno drone furtivo (tamanho de uma mosca).", "O drone é invisível e tem um deslocamento de voo de 9m. Você pode usar a sua Ação Bónus para mover o drone e ver/ouvir através dele."],
+                        upcast: "Se usar um Espaço de Nv. 3, a duração torna-se 1 hora."
+                    },
+                    {
+                        id: 'tec_esforco_granada_N2', nome: 'Granada Sónica', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: '18 metros', duracao: 'Instantâneo',
+                        desc: ["Você dispara uma granada sónica num ponto à sua escolha.", "Numa esfera de 3m, todos devem fazer um TR de Constituição (CD 8 + Prof + Mod. INT). Se falharem, sofrem 3d8 de dano sónico e ficam Atordoados por 1 rodada. Se passarem, sofrem metade do dano."],
+                        upcast: "O dano aumenta em +1d8 por cada Nível de Espaço acima do 2º."
+                    },
+                    {
+                        id: 'tec_esforco_salva_N2', nome: 'Salva de Micro-Mísseis', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: '36 metros', duracao: 'Instantâneo',
+                        desc: ["Você dispara 5 micro-mísseis (em vez dos 3 do Nível 1).", "Eles acertam automaticamente e causam 1d4+1 de dano de força cada."],
+                        upcast: "+1 míssil por Nível de Espaço acima do 2º."
+                    },
+                    {
+                        id: 'tec_esforco_invis_N2', nome: 'Invisibilidade Avançada', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: 'Concentração (1 hora)',
+                        desc: ["Você fica Invisível.", "A invisibilidade NÃO termina se você atacar ou usar um poder (ao contrário do Nível 1)."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'tec_esforco_reparar_N2', nome: 'Sistema de Reparação de Emergência', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Toque', duracao: 'Instantâneo',
+                        desc: ["Você usa um desfibrilador de alta potência.", "Você toca num alvo que esteja 'Incapacitado'. O alvo estabiliza imediatamente e sobe para o Nível 'Ferido' da Trilha de Condição."],
+                        upcast: "Nenhum."
+                    },
                 ]
             },
             mutante: {
@@ -218,6 +257,56 @@ document.addEventListener('DOMContentLoaded', () => {
                         id: 'mut_esforco_vantagem_N1', nome: 'Mutação Instável: Vantagem', tipo: 'Esforço', nivel: 1, custo_pc: 10,
                         ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: 'Instantâneo',
                         desc: ["Você força a sua biologia a adaptar-se.", "Você ganha Vantagem na sua próxima rolagem de Ataque, Teste de Habilidade ou Teste de Resistência antes do final do seu próximo turno."],
+                        upcast: "Nenhum."
+                    },
+                    
+                    // --- (NOVO) Nível 2 (Esforço) - Custo em PC ---
+                    {
+                        id: 'mut_esforco_furia_N2', nome: 'Fúria Berserker', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: '1 minuto',
+                        desc: ["Você entra numa fúria cega. Ganha Vantagem em ataques corpo a corpo (FOR), Resistência a dano físico (concussão, cortante, perfurante), mas sofre -2 em todas as suas Defesas (FORT, DEF, VON)."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'mut_esforco_regen_N2', nome: 'Regeneração Verdadeira', tipo: 'Esforço', nivel: 2, custo_pc: 15,
+                        ativacao: 'Passivo (Custa 1 Espaço para ativar)', alcance: 'Pessoal', duracao: '1 hora',
+                        desc: ["Você gasta um Espaço de Nível 2. Pela próxima hora, no início de cada um dos seus turnos, você sobe 1 Nível na Trilha de Condição (se não estiver 'Fresco')."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'mut_esforco_salto_N2', nome: 'Super-Salto', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: 'Instantâneo',
+                        desc: ["Você move-se até 30 metros (horizontal ou verticalmente) num único salto.", "Quando aterra, pode usar a sua Ação Bónus para fazer um `Soco Esmagador` (Nv. 0). Se o fizer, o alvo deve fazer um TR de Força (CD 8 + Prof + Mod. CON) ou fica Caído."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'mut_esforco_bioeletro_N2', nome: 'Bio-Eletricidade', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: '18 metros', duracao: 'Instantâneo',
+                        desc: ["Você dispara três raios de bio-eletricidade.", "Faça três ataques à distância separados (pode usar CON ou DES). Cada raio causa 2d6 de dano elétrico."],
+                        upcast: "Você dispara +1 raio adicional por Nível de Espaço acima do 2º."
+                    },
+                    {
+                        id: 'mut_esforco_forma_N2', nome: 'Forma Bestial', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: 'Concentração (10 minutos)',
+                        desc: ["Sua mutação torna-se selvagem (Ex: Fera, Lagarto). Você ganha:", "- Seus ataques de `Garras` (Nv. 0) causam 2d10 de dano.", "- Vantagem em testes de FOR (Atletismo) e SAB (Percepção).", "- +3m de deslocamento."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'mut_esforco_onda_N2', nome: 'Onda de Choque', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Pessoal (Esfera de 3m)', duracao: 'Instantâneo',
+                        desc: ["Você esmurra o chão.", "Todos no chão à sua volta devem fazer um TR de Destreza (CD 8 + Prof + Mod. CON). Se falharem, sofrem 3d8 de dano de concussão e ficam Caídos. Se passarem, sofrem metade do dano."],
+                        upcast: "O dano aumenta em +1d8 por cada Nível de Espaço acima do 2º."
+                    },
+                    {
+                        id: 'mut_esforco_feromonios_N2', nome: 'Feromônios Dominantes', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Pessoal (Raio de 3m)', duracao: 'Concentração (10 minutos)',
+                        desc: ["Você exala feromônios potentes.", "Durante 10 minutos, você tem Vantagem em todos os testes de Carisma (Persuasão, Enganação, Intimidação) contra humanoides a 3m de si."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'mut_esforco_resistencia_N2', nome: 'Resistência Biológica', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: '1 hora',
+                        desc: ["Você estabiliza a sua biologia.", "Durante 1 hora, você ganha Vantagem em todos os Testes de Resistência de Constituição (incluindo Testes de Resistência de Dano)."],
                         upcast: "Nenhum."
                     },
                 ]
@@ -308,6 +397,56 @@ document.addEventListener('DOMContentLoaded', () => {
                         desc: ["Você liberta uma onda de energia soporífera.", "Role 5d8. Você afeta criaturas com base no total rolado, começando pela que tiver o Nível de Trilha de Condição mais baixo. As criaturas afetadas caem Incapacitadas (adormecidas) por 1 minuto."],
                         upcast: "Role +2d8 por cada Nível de Espaço acima do 1º."
                     },
+                    
+                    // --- (NOVO) Nível 2 (Esforço) - Custo em PC ---
+                    {
+                        id: 'mis_esforco_teleporte_N2', nome: 'Teleporte', tipo: 'Esforço', nivel: 2, custo_pc: 15,
+                        ativacao: '1 Ação Bónus', alcance: '9 metros', duracao: 'Instantâneo',
+                        desc: ["Você desaparece num piscar de olhos e reaparece num local desocupado que possa ver."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'mis_esforco_invis_N2', nome: 'Invisibilidade', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação', alcance: 'Toque', duracao: 'Concentração (1 hora)',
+                        desc: ["Um alvo que você toca (pode ser você) fica Invisível.", "A invisibilidade termina se o alvo atacar ou usar um poder de Esforço."],
+                        upcast: "Se usar um Espaço de Nv. 3 ou superior, pode afetar +1 alvo adicional por Nível de Espaço."
+                    },
+                    {
+                        id: 'mis_esforco_bola_N2', nome: 'Bola de Fogo Mística', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: '24 metros', duracao: 'Instantâneo',
+                        desc: ["Você cria três raios de energia mística.", "Faça três ataques à distância separados (com SAB ou CAR). Cada raio causa 2d8 de dano."],
+                        upcast: "Você cria +1 raio adicional por Nível de Espaço acima do 2º."
+                    },
+                    {
+                        id: 'mis_esforco_imagem_N2', nome: 'Imagem Espelhada', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: '1 minuto',
+                        desc: ["Três duplicatas ilusórias de si mesmo aparecem.", "A sua Defesa (DEF) torna-se 10 + Mod. DES + 3. Cada vez que um ataque falha contra si, uma duplicata é destruída (o bónus baixa para +2, depois +1, depois 0)."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'mis_esforco_sugestao_N2', nome: 'Sugestão Mental', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação', alcance: '9 metros', duracao: 'Concentração (1 hora)',
+                        desc: ["Você sugere um curso de ação (Ex: 'Fuja e não volte') a um alvo.", "O alvo deve fazer um TR de Vontade (CD 8 + Prof + Mod. SAB/CAR). Se falhar, ele segue o seu comando. O comando não pode ser obviamente suicida."],
+                        upcast: "Se usar um Espaço de Nv. 5, a duração torna-se 24 horas."
+                    },
+                    {
+                        id: 'mis_esforco_ver_N2', nome: 'Ver o Invisível', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: '1 hora',
+                        desc: ["Durante 1 hora, os seus olhos brilham e você pode ver criaturas e objetos invisíveis como se fossem visíveis."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'mis_esforco_arma_N2', nome: 'Arma Espiritual', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação Bónus', alcance: '18 metros', duracao: '1 minuto',
+                        desc: ["Você cria uma arma flutuante de energia mística.", "Como Ação Bónus no seu turno, você pode movê-la 6m e fazer um ataque à distância (com SAB ou CAR). Se acertar, causa 1d8 + Mod. SAB/CAR de dano."],
+                        upcast: "O dano aumenta em +1d8 por cada Nível de Espaço par (4º, 6º, etc.) acima do 2º."
+                    },
+                    {
+                        id: 'mis_esforco_dissipar_N2', nome: 'Dissipar Magia', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: '18 metros', duracao: 'Instantâneo',
+                        desc: ["Escolha um efeito de poder (numa criatura ou objeto).", "Faça um teste do seu atributo de conjuração (SAB ou CAR) contra uma CD de 10 + o Nível do Poder. Se for bem-sucedido, você cancela o efeito."],
+                        upcast: "Você tem Vantagem no teste se o Nível do Espaço que usar for superior ao Nível do poder."
+                    },
                 ]
             },
             aprimorado: {
@@ -395,6 +534,56 @@ document.addEventListener('DOMContentLoaded', () => {
                         ativacao: '1 Reação (quando um inimigo ataca um aliado)', alcance: '1.5 metros', duracao: 'Instantâneo',
                         desc: ["Como reação quando um inimigo perto de si ataca um aliado, você o atrapalha.", "O inimigo tem Desvantagem nessa rolagem de ataque."],
                         upcast: "Nenhum."
+                    },
+                    
+                    // --- (NOVO) Nível 2 (Esforço) - Custo em PC ---
+                    {
+                        id: 'apr_esforco_velocidade_N2', nome: 'Super-Velocidade', tipo: 'Esforço', nivel: 2, custo_pc: 15,
+                        ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: 'Concentração (1 minuto)',
+                        desc: ["Você move-se mais rápido que o olho pode ver.", "O seu deslocamento é duplicado, você ganha +2 na sua Defesa (DEF), e ganha uma Ação adicional no seu turno (só pode ser usada para Atacar (1 ataque), Mover ou Esquivar)."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'apr_esforco_sentido_N2', nome: 'Sentido de Perigo Avançado', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Reação (quando um inimigo que você não vê o ataca)', alcance: 'Pessoal', duracao: 'Instantâneo',
+                        desc: ["O seu 'Sentido de Perigo' (Nv. 0) avisa-o.", "Como reação, você pode forçar o ataque desse inimigo (que teria Vantagem por estar escondido) a ser feito com Desvantagem."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'apr_esforco_bomba_N2', nome: 'Bomba de Teia', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: '18 metros', duracao: 'Instantâneo',
+                        desc: ["Você dispara uma bomba de teia que explode num cubo de 6m.", "A área torna-se terreno difícil. Qualquer criatura na área deve fazer um TR de Destreza (CD 8 + Prof + Mod. DES) ou fica 'Presa'."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'apr_esforco_ataquemulti_N2', nome: 'Ataque Múltiplo', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação Bónus (após usar a Ação de Ataque)', alcance: 'Pessoal', duracao: 'Instantâneo',
+                        desc: ["Imediatamente após usar a sua Ação de Ataque (com `Impacto Acrobático`), você pode usar a sua Ação Bónus para fazer dois ataques `Impacto Acrobático` (1d8) adicionais."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'apr_esforco_sorteincrivel_N2', nome: 'Sorte Inacreditável', tipo: 'Esforço', nivel: 2, custo_pc: 15,
+                        ativacao: '1 Reação (quando você ou um aliado falha)', alcance: '9 metros', duracao: 'Instantâneo',
+                        desc: ["Quando você ou um aliado a 9m de si falha num ataque, teste ou TR, você pode usar a sua Reação para adicionar +1d10 à rolagem, potencialmente transformando-a num sucesso."],
+                        upcast: "Se usar um Espaço de Nv. 3 ou superior, o dado de bónus torna-se +1d12."
+                    },
+                    {
+                        id: 'apr_esforco_desviarenergia_N2', nome: 'Desviar Energia', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Reação (quando é alvo de um ataque à distância de energia)', alcance: 'Pessoal', duracao: 'Instantâneo',
+                        desc: ["Quando você é alvo de um `Raio Místico` ou `Visão de Calor`...", "Faça um ataque à distância (com DES) contra o ataque do inimigo (como um TR oposto). Se o seu resultado for maior, você desvia o raio e não sofre dano."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'apr_esforco_vibracao_N2', nome: 'Vibração Molecular', tipo: 'Esforço', nivel: 2, custo_pc: 8,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: '1 minuto',
+                        desc: ["Você faz as suas mãos vibrarem a alta frequência.", "Durante 1 minuto, você pode atravessar objetos sólidos finos (como portas ou fechaduras) e ganha Vantagem em testes de Destreza para arrombar fechaduras."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'apr_esforco_ricochetemulti_N2', nome: 'Ricochete Múltiplo', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: '9 metros', duracao: 'Instantâneo',
+                        desc: ["Você arremessa um objeto que acerta três alvos.", "Faça um ataque à distância (com DES) contra cada um. Se acertar, cada alvo sofre 2d10 de dano."],
+                        upcast: "Se usar um Espaço de Nv. 3 ou superior, você pode alvejar +1 alvo adicional por Nível de Espaço."
                     },
                 ]
             },
@@ -484,6 +673,56 @@ document.addEventListener('DOMContentLoaded', () => {
                         desc: ["Você canaliza a sua resiliência alienígena.", "Você ganha Vantagem em todos os Testes de Resistência de Constituição (incluindo Testes de Resistência de Dano) durante 1 hora."],
                         upcast: "Nenhum."
                     },
+                    
+                    // --- (NOVO) Nível 2 (Esforço) - Custo em PC ---
+                    {
+                        id: 'ali_esforco_voo_N2', nome: 'Voo Verdadeiro', tipo: 'Esforço', nivel: 2, custo_pc: 15,
+                        ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: 'Concentração (10 minutos)',
+                        desc: ["Você voa livremente.", "Você ganha um deslocamento de voo de 18 metros."],
+                        upcast: "Se usar um Espaço de Nv. 3, a duração torna-se 1 hora."
+                    },
+                    {
+                        id: 'ali_esforco_invul_N2', nome: 'Invulnerabilidade (Média)', tipo: 'Esforço', nivel: 2, custo_pc: 15,
+                        ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: '1 hora',
+                        desc: ["Você ativa a sua aura de invulnerabilidade.", "Você ganha Resistência (meio dano) a dano de energia, fogo e frio durante 1 hora. (Acumula com `Invulnerabilidade (Menor)`)."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'ali_esforco_feito_N2', nome: 'Feito de Super-Força', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: 'Instantâneo',
+                        desc: ["Você canaliza a sua força máxima.", "Escolha um objeto massivo (um carro, um contentor). Faça um teste de Força (Atletismo) (CD 20). Se for bem-sucedido, você levanta esse objeto e pode usá-lo como uma arma (dano 4d10) ou atirá-lo (alcance 9m/18m)."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'ali_esforco_visao_N2', nome: 'Visão de Calor (Linha)', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Pessoal (Linha de 9m)', duracao: 'Instantâneo',
+                        desc: ["Você dispara um raio contínuo de calor.", "Todos numa linha de 9m devem fazer um TR de Destreza (CD 8 + Prof + Mod. CON). Se falharem, sofrem 4d8 de dano de fogo. Se passarem, sofrem metade."],
+                        upcast: "O dano aumenta em +1d8 por cada Nível de Espaço acima do 2º."
+                    },
+                    {
+                        id: 'ali_esforco_soprocongelante_N2', nome: 'Sopro Congelante', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Cone de 4.5m', duracao: 'Instantâneo',
+                        desc: ["Você expele uma rajada de ar ártico.", "Todos na área devem fazer um TR de Constituição (CD 8 + Prof + Mod. CON). Se falharem, sofrem 3d8 de dano de frio e ficam 'Presos' (velocidade 0) por 1 minuto. Se passarem, sofrem metade."],
+                        upcast: "O dano aumenta em +1d8 por cada Nível de Espaço acima do 2º."
+                    },
+                    {
+                        id: 'ali_esforco_resistencia_N2', nome: 'Resistência Cósmica', tipo: 'Esforço', nivel: 2, custo_pc: 12,
+                        ativacao: '1 Ação', alcance: 'Pessoal', duracao: '1 hora',
+                        desc: ["Você canaliza a sua resiliência alienígena.", "Você ganha Vantagem em todos os Testes de Resistência de Constituição e Sabedoria (incluindo Testes de Resistência de Dano) durante 1 hora."],
+                        upcast: "Nenhum."
+                    },
+                    {
+                        id: 'ali_esforco_soco_N2', nome: 'Soco Sónico', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação', alcance: 'Pessoal (Esfera de 3m)', duracao: 'Instantâneo',
+                        desc: ["Você bate as palmas com força trovejante.", "Todos à sua volta devem fazer um TR de Constituição (CD 8 + Prof + Mod. FOR). Se falharem, sofrem 3d8 de dano sónico e são Empurrados 3m."],
+                        upcast: "O dano aumenta em +1d8 por cada Nível de Espaço acima do 2º."
+                    },
+                    {
+                        id: 'ali_esforco_absorcao_N2', nome: 'Absorção Solar (Combate)', tipo: 'Esforço', nivel: 2, custo_pc: 10,
+                        ativacao: '1 Ação Bónus', alcance: 'Pessoal', duracao: 'Instantâneo',
+                        desc: ["Se você estiver sob luz solar direta, você absorve energia.", "Você sobe 2 Níveis na Trilha de Condição (Ex: de 'Machucado' para 'Fresco')."],
+                        upcast: "Nenhum."
+                    },
                 ]
             }
         },
@@ -505,12 +744,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let currentStep = 1;
         const totalSteps = 4;
-        let pcBase = 40; // PC Base é 40
-        const maxNv0 = 3; // Máximo de 3 Nv. 0 Grátis
+        let pcBase = 40; 
+        const maxNv0 = 3; 
 
         let fichaAtual = {
             matriz: null,
-            np: 1,
+            np: 1, // O assistente está "trancado" no NP 1 por enquanto
             poderes: {},
             complicacoes: {}
         };
@@ -563,7 +802,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let nv0Count = 0;
             
             for (const poder of matriz.poderes) {
-                if (poder.nivel <= fichaAtual.np) {
+                // (O assistente só mostra poderes que um NP 1 pode comprar)
+                if (poder.nivel <= fichaAtual.np) { 
                     if (!poderesPorNivel[poder.nivel]) {
                         poderesPorNivel[poder.nivel] = [];
                     }
@@ -828,72 +1068,112 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 4. LÓGICA DO CAPÍTULO 3 (REFERÊNCIA) ---
     
-    function buildReferencePage() {
-        const refContainer = document.getElementById('matrizes-referencia-completa');
-        if (!refContainer) return;
+    const refContainer = document.getElementById('matrizes-referencia-completa');
+    if (refContainer) {
+        
+        /** (REFATORADO) Constrói a página de Referência Estática (Capítulo 3) */
+        function buildReferencePage() {
+            refContainer.innerHTML = ''; // Limpa o "placeholder"
 
-        refContainer.innerHTML = '';
+            for (const [key, matriz] of Object.entries(DADOS_SISTEMA.matrizes)) {
+                
+                // 1. Cria o contentor principal do acordeão
+                const accordionItem = document.createElement('article');
+                accordionItem.className = 'accordion-item';
 
-        for (const [key, matriz] of Object.entries(DADOS_SISTEMA.matrizes)) {
-            
-            const poderesPorNivel = {};
-            for (const poder of matriz.poderes) {
-                if (!poderesPorNivel[poder.nivel]) {
-                    poderesPorNivel[poder.nivel] = [];
-                }
-                poderesPorNivel[poder.nivel].push(poder);
-            }
-            
-            let poderesHTML = '';
-            const ordemNiveis = Object.keys(poderesPorNivel).sort((a,b) => a - b);
+                // 2. Cria o cabeçalho clicável
+                const header = document.createElement('h3');
+                header.className = 'accordion-header';
+                header.innerHTML = `<span class="accordion-icon">[+]</span> ${matriz.nome}`;
+                
+                // 3. Cria o painel de conteúdo (começa fechado)
+                const panel = document.createElement('div');
+                panel.className = 'accordion-panel';
 
-            for (const nivel of ordemNiveis) {
-                let nivelLabel = `Poderes de Esforço (Nível ${nivel})`;
-                if (nivel == 0) nivelLabel = "Poderes Passivos & À Vontade (Nível 0)";
-                poderesHTML += `<h4 class="power-level-header">${nivelLabel}</h4>`;
-
-                for (const poder of poderesPorNivel[nivel]) {
-                    let custoPC_texto = `<strong>Custo (PC):</strong> ${poder.custo_pc}`;
-                    if (poder.custo_pc === 0) {
-                        custoPC_texto = `<strong>Custo (PC):</strong> Gratuito (Escolha de Matriz)`;
+                // 4. Constrói o conteúdo INTERNO do painel
+                let panelContent = '';
+                const poderesPorNivel = {};
+                for (const poder of matriz.poderes) {
+                    if (!poderesPorNivel[poder.nivel]) {
+                        poderesPorNivel[poder.nivel] = [];
                     }
-
-                    poderesHTML += `
-                    <div class="poder-card-ref">
-                        <div class="poder-card-header">
-                            <strong>${poder.nome} (${poder.tipo})</strong>
-                            <span>${custoPC_texto}</span>
-                        </div>
-                        <div class="poder-card-stats">
-                            <span><strong>Custo (Ativação):</strong> ${poder.nivel == 0 ? '0 Espaços' : `1 Espaço Nv. ${poder.nivel}`}</span>
-                            <span><strong>Ativação:</strong> ${poder.ativacao}</span>
-                            <span><strong>Alcance:</strong> ${poder.alcance}</span>
-                            <span><strong>Duração:</strong> ${poder.duracao}</span>
-                        </div>
-                        <div class="poder-card-desc">
-                            ${poder.desc.map(p => `<p>${p}</p>`).join('')}
-                            <p class="ranks-superiores"><strong>Em Níveis Superiores:</strong> ${poder.upcast}</p>
-                        </div>
-                    </div>
-                    `;
+                    poderesPorNivel[poder.nivel].push(poder);
                 }
-            }
-            
-            refContainer.innerHTML += `
-                <article class="matriz-reference-entry">
-                    <h3>${matriz.nome}</h3>
-                    <p>${matriz.desc}</p>
-                    <p><strong>Atributo Primário:</strong> ${matriz.atributoPrimario}</p>
-                    <strong>Habilidades Iniciais:</strong>
-                    <ul class="habilidades-iniciais">
-                        ${matriz.habilidadesIniciais.map(h => `<li>${h}</li>`).join('')}
-                    </ul>
-                    ${poderesHTML}
-                </article>
-            `;
-        }
-    }
+                
+                // Adiciona a descrição e habilidades iniciais
+                panelContent += `<p>${matriz.desc}</p>`;
+                panelContent += `<p><strong>Atributo Primário:</strong> ${matriz.atributoPrimario}</p>`;
+                panelContent += '<strong>Habilidades Iniciais:</strong>';
+                panelContent += `<ul class="habilidades-iniciais">
+                                    ${matriz.habilidadesIniciais.map(h => `<li>${h}</li>`).join('')}
+                                </ul>`;
+                
+                const ordemNiveis = Object.keys(poderesPorNivel).sort((a,b) => a - b);
 
-    buildReferencePage();
+                for (const nivel of ordemNiveis) {
+                    let nivelLabel = `Poderes de Esforço (Nível ${nivel})`;
+                    if (nivel == 0) nivelLabel = "Poderes Passivos & À Vontade (Nível 0)";
+                    panelContent += `<h4 class="power-level-header">${nivelLabel}</h4>`;
+
+                    for (const poder of poderesPorNivel[nivel]) {
+                        let custoPC_texto = `<strong>Custo (PC):</strong> ${poder.custo_pc}`;
+                        if (poder.custo_pc === 0) {
+                            custoPC_texto = `<strong>Custo (PC):</strong> Gratuito (Escolha de Matriz)`;
+                        }
+
+                        panelContent += `
+                        <div class="poder-card-ref">
+                            <div class="poder-card-header">
+                                <strong>${poder.nome} (${poder.tipo})</strong>
+                                <span>${custoPC_texto}</span>
+                            </div>
+                            <div class="poder-card-stats">
+                                <span><strong>Custo (Ativação):</strong> ${poder.nivel == 0 ? '0 Espaços' : `1 Espaço Nv. ${poder.nivel}`}</span>
+                                <span><strong>Ativação:</strong> ${poder.ativacao}</span>
+                                <span><strong>Alcance:</strong> ${poder.alcance}</span>
+                                <span><strong>Duração:</strong> ${poder.duracao}</span>
+                            </div>
+                            <div class="poder-card-desc">
+                                ${poder.desc.map(p => `<p>${p}</p>`).join('')}
+                                <p class="ranks-superiores"><strong>Em Níveis Superiores:</strong> ${poder.upcast}</p>
+                            </div>
+                        </div>
+                        `;
+                    }
+                }
+                
+                // 5. Adiciona o conteúdo e junta tudo
+                panel.innerHTML = panelContent;
+                accordionItem.appendChild(header);
+                accordionItem.appendChild(panel);
+                refContainer.appendChild(accordionItem);
+            }
+        }
+
+        // (NOVO) Event Listener para controlar o clique no Acordeão
+        refContainer.addEventListener('click', (e) => {
+            const header = e.target.closest('.accordion-header');
+            if (!header) return; // Sai se o clique não foi no cabeçalho
+
+            const panel = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+
+            // Alterna (toggle) o estado
+            if (panel.style.maxHeight) {
+                // Fecha
+                panel.style.maxHeight = null;
+                header.classList.remove('active');
+                if (icon) icon.textContent = '[+]';
+            } else {
+                // Abre
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                header.classList.add('active');
+                if (icon) icon.textContent = '[-]';
+            }
+        });
+
+        // --- RODA O CONSTRUTOR DA REFERÊNCIA ---
+        buildReferencePage();
+    }
 
 }); // Fim do 'DOMContentLoaded'

@@ -5,8 +5,7 @@
 
 /* --- 1. RESET BÁSICO E TEMA DARK --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-/* (CORREÇÃO) O scroll-padding-top agora só precisa de considerar o header principal */
-html { scroll-padding-top: 71px; } 
+html { scroll-padding-top: 71px; /* (CORREÇÃO) Altura do novo header fixo */ } 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #121212;
@@ -76,8 +75,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     justify-content: center;
     background: #1f1f1f;
     border-bottom: 1px solid #333;
-    /* --- (CORREÇÃO) REMOVIDO "position: sticky" e "top: 71px" --- */
-    /* --- (CORREÇÃO) REMOVIDO "z-index: 200" --- */
+    /* --- (CORREÇÃO) REMOVIDO "position: sticky" --- */
 }
 .sub-nav-btn {
     background: none;
@@ -106,19 +104,17 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     overflow: hidden;
 }
+.wizard-step { display: none; padding: 1.5rem; }
+.wizard-step.active { display: block; }
 /* (CORREÇÃO DO BUG) O margin-top já não é necessário */
 .wizard-step h2 {
     /* margin-top: 1rem; <- REMOVIDO */
 }
-.wizard-step { display: none; padding: 1.5rem; }
-.wizard-step.active { display: block; }
-
 #pp-tracker-container {
     background: #181818;
     padding: 1rem;
     text-align: center;
-    /* --- (CORREÇÃO) REMOVIDO "position: sticky" e "top: 126px" --- */
-    /* --- (CORREÇÃO) REMOVIDO "z-index: 100" --- */
+    /* --- (CORREÇÃO) REMOVIDO "position: sticky" --- */
     border-bottom: 1px solid #333;
 }
 .pp-tracker { font-size: 1.2rem; font-weight: 600; }
@@ -266,27 +262,54 @@ hr { border: 1px solid #333; margin: 2rem 0; }
 
 
 /* --- 7. ESTILOS DO CAPÍTULO 3 (REFERÊNCIA DE MATRIZES) --- */
-.matriz-reference-entry {
-    margin-bottom: 3rem;
+/* (NOVO) Estilo Base do Item Acordeão */
+.accordion-item {
+    margin-bottom: 1rem;
     background: #1a1a1a;
-    padding: 0;
     border-radius: 8px;
     border: 1px solid #333;
     overflow: hidden;
 }
-.matriz-reference-entry h3 {
+/* (NOVO) Cabeçalho Clicável */
+.accordion-header {
     color: #00aaff;
-    border-bottom: 1px solid #333;
     font-size: 1.8rem;
     padding: 1rem 1.5rem;
     background: #222;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #333;
+    margin: 0; /* Reseta o margin do h3 */
 }
-.matriz-reference-entry > p,
-.matriz-reference-entry > strong,
-.matriz-reference-entry > .habilidades-iniciais {
+.accordion-header:hover {
+    background: #333;
+}
+.accordion-header .accordion-icon {
+    display: inline-block;
+    color: #aaa;
+    margin-right: 0.5rem;
+    transition: transform 0.2s;
+}
+.accordion-header.active .accordion-icon {
+    transform: rotate(90deg);
+    color: #00aaff;
+}
+/* (NOVO) Painel de Conteúdo (Escondido) */
+.accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+/* (NOVO) Estilos para o conteúdo DENTRO do painel */
+.accordion-panel > p,
+.accordion-panel > strong,
+.accordion-panel > .habilidades-iniciais {
     padding: 0 1.5rem;
 }
-.matriz-reference-entry > .power-level-header {
+.accordion-panel > p:first-child {
+    padding-top: 1rem; /* Adiciona espaço no topo do conteúdo */
+}
+.accordion-panel > .power-level-header {
     color: #eee;
     margin-top: 2rem;
     margin-bottom: 0;
@@ -344,7 +367,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     font-size: 0.95rem;
 }
 
-/* --- 8. REGRAS DE RESPONSIVIDADE (MENU POPUP) --- */
+/* --- 8. (NOVO) REGRAS DE RESPONSIVIDADE (MENU POPUP) --- */
 
 /* Botões do Menu Popup (Hambúrguer e Fechar) */
 .hamburger-menu {
@@ -373,6 +396,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     main {
         padding: 1rem 0.5rem;
     }
+    .header-content h1 { font-size: 1.2rem; }
     
     /* (NOVO) Mostra o botão Hambúrguer */
     .hamburger-menu {
@@ -428,9 +452,9 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     .wizard-nav {
         padding: 1rem;
     }
-    /* (CORREÇÃO DO BUG) O tracker já não é sticky, por isso não precisa de 'top' */
+    /* (CORREÇÃO DO BUG) O tracker já não é sticky */
     #pp-tracker-container {
-        /* top: 71px; <- REMOVIDO */
+        position: static; /* Remove o "sticky" */
     }
 
     /* 4. Ajustes nos Cartões de Poder */

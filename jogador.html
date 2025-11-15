@@ -46,7 +46,7 @@
                 <li><strong>Espaços de Poder (Slots):</strong> Esta é a sua "munição" diária. Você tem um número de Espaços (Ex: 3 de Nível 1, no NP 1) que gasta para ativar os seus "Poderes de Esforço". Estes Espaços recarregam num **Descanso Longo**.</li>
             </ul>
 
-            <hr style="border: 1px solid #333; margin: 2rem 0;">
+            <hr>
 
             <h3>Passo 1: Conceito e Matriz de Poder</h3>
             <p>Esta é a sua escolha mais importante. A sua <strong>Matriz de Poder</strong> é a fonte das suas habilidades e define a sua "lista de poderes" que você pode comprar com os seus PC.</p>
@@ -73,10 +73,11 @@
             
             <p style="margin-top: 1rem;">Ao escolher a sua Matriz, você ganha as suas **Habilidades Iniciais** (listadas no Cap. 3), que incluem proficiências e outros bónus.</p>
             
-            <hr style="border: 1px solid #333; margin: 2rem 0;">
+            <hr>
 
             <h3>Passo 2: Atributos</h3>
             <p>Determine os seus seis Atributos (FOR, DES, CON, INT, SAB, CAR). Distribua os seguintes valores pelos seus seis atributos, como desejar: <strong>15, 14, 12, 12, 10, 8</strong>.</p>
+            <p>A sua escolha de onde colocar o 15 (para um bónus de +2) e o 8 (para uma penalidade de -1) é a primeira grande decisão da sua "build".</p>
             
             <h3>Passo 3: Nível de Protagonista (NP) e Espaços</h3>
             <p>O seu herói começa no <strong>Nível de Protagonista (NP) 1</strong>.</p>
@@ -149,6 +150,27 @@
             </ol>
             <p>Quando você sofre dano, faz um <strong>Teste de Resistência de Dano</strong> (normalmente contra a sua Fortitude) contra a CD do Mestre. Se falhar, desce um nível na Trilha e ganha uma <strong>Complicação de Combate</strong> (Ex: "Braço Ferido").</p>
 
+            <h3>Ações em Combate</h3>
+            <p>No seu turno, você pode <strong>Mover-se</strong> até o seu deslocamento e realizar uma <strong>Ação</strong>. Você só tem uma <strong>Reação</strong> por rodada (que recupera no seu turno).</p>
+            <p>Quando você realiza a sua Ação, pode usar um dos seus Poderes (À Vontade ou de Esforço) ou pode realizar uma das seguintes ações padrão:</p>
+            <ul style="list-style-type: disc; padding-left: 1.5rem;">
+                <li style="margin-bottom: 1rem;">
+                    <strong>Agarrar:</strong> (Substitui o seu ataque) Faça um teste de Força (Atletismo) contra um TR de Força (Atletismo) ou Destreza (Acrobacia) do alvo. Se vencer, o alvo fica "Agarrado" (velocidade 0).
+                </li>
+                <li style="margin-bottom: 1rem;">
+                    <strong>Empurrar:</strong> (Substitui o seu ataque) Faça um teste de Força (Atletismo) contra um TR de Força (Atletismo) do alvo. Se vencer, você pode empurrá-lo 1.5m ou derrubá-lo (deixá-lo "Caído").
+                </li>
+                <li style="margin-bottom: 1rem;">
+                    <strong>Esquivar:</strong> Você foca-se em defender-se. Até o início do seu próximo turno, qualquer ataque contra si tem **Desvantagem**.
+                </li>
+                <li style="margin-bottom: 1rem;">
+                    <strong>Ajudar:</strong> Você distrai um inimigo ou ajuda um aliado. Escolha um aliado. Ele ganha **Vantagem** na sua *próxima* rolagem de ataque contra um inimigo que esteja a 1.5m de si.
+                </li>
+                <li style="margin-bottom: 1rem;">
+                    <strong>Preparar:</strong> Você espera pelo momento certo. Declare uma Ação (Ex: "Eu preparo a minha `Rajada Simples`") e um gatilho (Ex: "assim que o capanga abrir aquela porta"). Se o gatilho ocorrer, você pode usar a sua Reação para executar a Ação preparada.
+                </li>
+            </ul>
+
             <h3>Usar Poderes (O Jogo "Esperto")</h3>
             <p>A sua principal preocupação tática em combate será gerir os seus <strong>Espaços de Poder</strong>.</p>
             
@@ -163,9 +185,22 @@
             <h3>Descanso</h3>
             <p>Os recursos são limitados e é isto que torna o jogo "letal".</p>
             <ul style="list-style-type: disc; padding-left: 1.5rem;">
-                <li><strong>Descanso Curto (1 hora):</strong> Você pode usar Dados de Determinação para recuperar-se na Trilha de Condição. Você <strong>não</strong> recupera Espaços de Poder.</li>
-                <li><strong>Descanso Longo (8 horas):</strong> Você recupera totalmente (volta a "Fresco") e recupera **todos** os Espaços de Poder gastos.</li>
+                <li style="margin-bottom: 1rem;">
+                    <strong>Descanso Longo (8 horas):</strong> Você recupera totalmente (volta a "Fresco") e recupera **todos** os Espaços de Poder gastos.
+                </li>
             </ul>
+
+            <h4>Descanso Curto (Dados de Vigor)</h4>
+            <p>Um Descanso Curto dura 1 hora. Durante este tempo, você pode "remendar-se" gastando <strong>Dados de Vigor</strong>. Você tem um número de Dados de Vigor igual ao seu NP (Nível de Protagonista).</p>
+            <p>O tipo de dado é definido pela sua Matriz (Ex: d10 para Mutantes, d8 para Tecnólogos). Você pode gastar um ou mais Dados de Vigor:</p>
+            <ol>
+                <li>Role o Dado de Vigor + Mod. CON.</li>
+                <li>A CD para se recuperar é 10.</li>
+                <li><strong>Se passar (10+):</strong> Você sobe **1 Nível na Trilha de Condição** (Ex: de 'Machucado' para 'Ferido').</li>
+                <li><strong>Se falhar (9 ou menos):</strong> Você não melhora. O Dado de Vigor é gasto à mesma.</li>
+            </ol>
+            <p>Você <strong>não</strong> recupera Espaços de Poder num Descanso Curto.</p>
+
 
             <h3>Tabela de Progressão de Protagonista (NP 1-10)</h3>
             <p>Esta é a tabela central do seu herói. O seu Mestre dir-lhe-á quando você sobe de NP.</p>
