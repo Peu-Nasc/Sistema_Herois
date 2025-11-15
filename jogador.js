@@ -1,19 +1,44 @@
 // Aguarda o HTML carregar
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. LÓGICA DAS ABAS (TABS) ---
-    const subNav = document.querySelector('.sub-nav');
+    // --- 1. LÓGICA DAS ABAS (TABS) E MENU POPUP (NOVO) ---
+    const subNav = document.getElementById('sub-nav-jogador');
     const contentSections = document.querySelectorAll('.content-section');
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
 
     if (subNav) {
         subNav.addEventListener('click', (e) => {
+            // Só ativa se clicar num botão de aba
             if (!e.target.classList.contains('sub-nav-btn')) return;
+
             const targetId = e.target.dataset.target;
+            
+            // Atualiza botões
             subNav.querySelectorAll('.sub-nav-btn').forEach(btn => btn.classList.remove('active'));
             e.target.classList.add('active');
+
+            // Atualiza conteúdo
             contentSections.forEach(section => {
                 section.classList.toggle('active', section.id === targetId);
             });
+            
+            // (NOVO) Fecha o menu popup após clicar numa aba
+            if (window.innerWidth <= 768) {
+                subNav.classList.remove('open');
+            }
+        });
+    }
+
+    // (NOVO) Lógica do Menu Hambúrguer
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => {
+            subNav.classList.add('open');
+        });
+    }
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', () => {
+            subNav.classList.remove('open');
         });
     }
 
@@ -463,11 +488,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         complicacoes: [
-            // --- MUDANÇA (Edição 1): Custo agora em "pc" ---
             { id: 'comp_id', nome: 'Identidade Secreta', pc: 5 },
-            { id: 'comp_vul', nome: 'Vulnerabilidade (Comum - Ex: Kryptonita)', pc: 10 },
+            { id: 'comp_vul', nome: 'Vulnerabilidade (Comum)', pc: 10 },
             { id: 'comp_vul_m', nome: 'Vulnerabilidade (Mágica)', pc: 10 },
-            { id: 'comp_cod', nome: 'Código de Honra (Ex: Não matar)', pc: 5 },
+            { id: 'comp_cod', nome: 'Código de Honra (Não matar)', pc: 5 },
             { id: 'comp_dep', nome: 'Dependente de Poder (Item)', pc: 10 },
             { id: 'comp_inim', nome: 'Inimigo (Recorrente)', pc: 5 },
         ]
@@ -481,8 +505,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         let currentStep = 1;
         const totalSteps = 4;
-        let pcBase = 40; // --- MUDANÇA (Edição 1): PC Base é 40 ---
-        const maxNv0 = 3; // --- MUDANÇA (Edição 1): Máximo de 3 Nv. 0 Grátis ---
+        let pcBase = 40; // PC Base é 40
+        const maxNv0 = 3; // Máximo de 3 Nv. 0 Grátis
 
         let fichaAtual = {
             matriz: null,
@@ -500,7 +524,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const divComplicacoesLista = document.getElementById('complicacoes-lista');
         const divFichaFinal = document.getElementById('ficha-final-resumo');
 
-        /** Função principal que inicia o assistente */
         function init() {
             ppTrackerContainer.innerHTML = `
                 <span class="pp-tracker">
@@ -519,7 +542,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showStep(1);
         }
 
-        /** Constrói o HTML para o Passo 1 (Seleção de Matriz) */
         function buildStep1() {
             matrizSelectionContainer.innerHTML = '';
             for (const [key, matriz] of Object.entries(DADOS_SISTEMA.matrizes)) {
@@ -533,7 +555,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        /** (REFATORADO) Constrói o HTML para o Passo 2 (Poderes) */
         function buildStep2() {
             if (!fichaAtual.matriz) return;
             const matriz = DADOS_SISTEMA.matrizes[fichaAtual.matriz];
@@ -542,14 +563,13 @@ document.addEventListener('DOMContentLoaded', () => {
             let nv0Count = 0;
             
             for (const poder of matriz.poderes) {
-                if (poder.nivel <= fichaAtual.np) { // Só mostra poderes de Nv 0 e 1
+                if (poder.nivel <= fichaAtual.np) {
                     if (!poderesPorNivel[poder.nivel]) {
                         poderesPorNivel[poder.nivel] = [];
                     }
                     poderesPorNivel[poder.nivel].push(poder);
                 }
             }
-            // Conta quantos Nv 0 já foram escolhidos
             for (const poder of Object.values(fichaAtual.poderes)) {
                 if (poder.nivel === 0) nv0Count++;
             }
@@ -566,17 +586,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 for (const poder of poderesPorNivel[nivel]) {
                     const poderNaFicha = fichaAtual.poderes[poder.id];
                     
-                    // --- MUDANÇA (Edição 1): Lógica dos botões ---
                     let controlsHTML = '';
                     if (poder.nivel === 0) {
-                        // Lógica para Nível 0 (Grátis, limite de 3)
                         if (poderNaFicha) {
                             controlsHTML = `<button class="btn btn-small btn-remove" data-id="${poder.id}">Remover</button>`;
                         } else {
                             controlsHTML = `<button class="btn btn-small btn-add" data-id="${poder.id}" ${nv0Count >= maxNv0 ? 'disabled' : ''}>Escolher (Grátis)</button>`;
                         }
                     } else {
-                        // Lógica para Nível 1 (Custo em PC)
                         if (poderNaFicha) {
                             controlsHTML = `<button class="btn btn-small btn-remove" data-id="${poder.id}">Remover</button>`;
                         } else {
@@ -607,7 +624,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        /** Constrói o HTML para o Passo 3 (Complicações) */
         function buildStep3() {
             divComplicacoesLista.innerHTML = '';
             for (const comp of DADOS_SISTEMA.complicacoes) {
@@ -626,7 +642,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        /** (REFATORADO) Constrói o HTML para o Passo 4 (Revisão Final) */
         function buildStep4() {
             if (!fichaAtual.matriz) return;
             const matriz = DADOS_SISTEMA.matrizes[fichaAtual.matriz];
@@ -680,7 +695,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
 
-        /** Mostra o passo desejado e esconde os outros */
         function showStep(stepNum) {
             wizardContainer.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
             document.getElementById(`step-${stepNum}`).classList.add('active');
@@ -698,36 +712,30 @@ document.addEventListener('DOMContentLoaded', () => {
         function navigatePrev() { if (currentStep > 1) showStep(currentStep - 1); }
         function navigateNext() { if (currentStep < totalSteps) showStep(currentStep + 1); }
 
-        /** (REFATORADO) Recalcula e atualiza o total de PC */
         function updatePCTotal(returnOnly = false) {
             let custoPoderes = 0;
-            // --- MUDANÇA (Edição 1): Só conta o PC de poderes Nv 1+ ---
             for (const poder of Object.values(fichaAtual.poderes)) {
                 if (poder.nivel > 0) {
                     custoPoderes += poder.custo_pc;
                 }
             }
-            
             let bonusComplicacoes = 0;
             for (const comp of Object.values(fichaAtual.complicacoes)) {
                 bonusComplicacoes += comp.pc;
             }
             
-            if (returnOnly) return custoPoderes; // Usado pelo Resumo Final
+            if (returnOnly) return custoPoderes;
 
             const pcRestante = pcBase + bonusComplicacoes - custoPoderes;
             const pcTotalSpan = document.getElementById('pp-total');
             if(pcTotalSpan) {
                 pcTotalSpan.textContent = pcRestante;
                 pcTotalSpan.classList.toggle('negativo', pcRestante < 0);
-                // Atualiza o texto do tracker
                 ppTrackerContainer.querySelector('.pp-tracker').innerHTML = `Pontos de Criação (PC) Restantes: <span id="pp-total" class="${pcRestante < 0 ? 'negativo' : ''}">${pcRestante}</span>`;
             }
-            // Retorna o valor restante para a verificação
             return pcRestante;
         }
         
-        /** Chamada quando o jogador clica num card de Matriz */
         function handleMatrizSelect(e) {
             const card = e.target.closest('.matriz-card');
             if (!card) return;
@@ -742,8 +750,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             fichaAtual.matriz = matrizKey;
-            fichaAtual.poderes = {}; // Reseta poderes
-            fichaAtual.complicacoes = {}; // Reseta complicações
+            fichaAtual.poderes = {};
+            fichaAtual.complicacoes = {};
             
             matrizSelectionContainer.querySelectorAll('.matriz-card').forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
@@ -751,10 +759,9 @@ document.addEventListener('DOMContentLoaded', () => {
             btnNext.disabled = false;
             
             updatePCTotal();
-            buildStep3(); // Reconstrói o passo 3 para desmarcar as checkboxes
+            buildStep3();
         }
 
-        /** (REFATORADO E CORRIGIDO) Chamada quando o jogador clica em Adicionar/Remover */
         function handlePoderClick(e) {
             const button = e.target.closest('button.btn-add, button.btn-remove');
             if (!button) return;
@@ -765,10 +772,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const dadosPoder = DADOS_SISTEMA.matrizes[fichaAtual.matriz].poderes.find(p => p.id === id);
             if (!dadosPoder) return;
 
-            // --- LÓGICA DE ADICIONAR ---
             if (button.classList.contains('btn-add')) {
                 if (dadosPoder.nivel === 0) {
-                    // Lógica para Nível 0 (Grátis, limite de 3)
                     let nv0Count = 0;
                     for (const poder of Object.values(fichaAtual.poderes)) {
                         if (poder.nivel === 0) nv0Count++;
@@ -778,18 +783,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         return;
                     }
                 } else {
-                    // --- AQUI ESTÁ O BUGFIX (A GUARDA) ---
-                    // Lógica para Nível 1+ (Custo em PC)
-                    const pcRestante = updatePCTotal(); // Pega o PC atual
+                    const pcRestante = updatePCTotal();
                     if (dadosPoder.custo_pc > pcRestante) {
                         alert("Pontos de Criação (PC) insuficientes para comprar este poder!");
-                        return; // Para a função aqui
+                        return;
                     }
                 }
-                // Se passou nas guardas, adiciona o poder
                 fichaAtual.poderes[id] = { ...dadosPoder };
-
-            // --- LÓGICA DE REMOVER ---
             } else if (button.classList.contains('btn-remove')) {
                 delete fichaAtual.poderes[id];
             }
@@ -798,7 +798,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePCTotal();
         }
         
-        /** Chamada quando o jogador marca/desmarca uma Complicação */
         function handleComplicacaoToggle(e) {
             const checkbox = e.target;
             if (checkbox.type !== 'checkbox') return;
@@ -806,13 +805,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const nome = checkbox.dataset.nome;
             const pc = parseInt(checkbox.dataset.pc);
 
-            // --- BUGFIX (GUARDA) ---
-            // Não deixa desmarcar uma complicação se isso for deixar o PC negativo
             if (!checkbox.checked) {
                 const pcRestante = updatePCTotal();
                 if (pcRestante < pc) {
                     alert("Você não pode remover esta complicação, pois já gastou os PC que ela fornece.");
-                    checkbox.checked = true; // Impede a desmarcação
+                    checkbox.checked = true;
                     return;
                 }
             }
@@ -825,15 +822,12 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePCTotal();
         }
 
-        // --- RODA O ASSISTENTE ---
         init();
-
     } // Fim do 'if (wizardContainer)'
 
 
     // --- 4. LÓGICA DO CAPÍTULO 3 (REFERÊNCIA) ---
     
-    /** (REFATORADO) Constrói a página de Referência Estática (Capítulo 3) */
     function buildReferencePage() {
         const refContainer = document.getElementById('matrizes-referencia-completa');
         if (!refContainer) return;
@@ -859,7 +853,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 poderesHTML += `<h4 class="power-level-header">${nivelLabel}</h4>`;
 
                 for (const poder of poderesPorNivel[nivel]) {
-                    // --- MUDANÇA (Edição 1): Custo de PC na Referência ---
                     let custoPC_texto = `<strong>Custo (PC):</strong> ${poder.custo_pc}`;
                     if (poder.custo_pc === 0) {
                         custoPC_texto = `<strong>Custo (PC):</strong> Gratuito (Escolha de Matriz)`;
@@ -901,7 +894,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- RODA O CONSTRUTOR DA REFERÊNCIA ---
     buildReferencePage();
 
 }); // Fim do 'DOMContentLoaded'

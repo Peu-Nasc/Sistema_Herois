@@ -8,12 +8,16 @@
 </head>
 <body>
 
-    <header>
-        <h1><a href="index.html">SISTEMA DE HERÓIS</a></h1>
-        <p>Guia do Protagonista (Livro do Jogador - Edição 1)</p>
+    <header class="header-com-menu">
+        <div class="header-content">
+            <h1><a href="index.html">SISTEMA DE HERÓIS</a></h1>
+            <p>Guia do Protagonista (Livro do Jogador - Edição 1)</p>
+        </div>
+        <button id="hamburger-btn" class="hamburger-menu">☰</button>
     </header>
 
-    <nav class="sub-nav">
+    <nav class="sub-nav" id="sub-nav-jogador">
+        <button id="close-menu-btn" class="close-menu-btn">X</button>
         <button class="sub-nav-btn active" data-target="capitulo1">Cap. 1: Criação de Protagonista</button>
         <button class="sub-nav-btn" data-target="regras">Cap. 2: Regras do Jogo</button>
         <button class="sub-nav-btn" data-target="referencia">Cap. 3: Poderes (Matrizes)</button>
@@ -72,9 +76,7 @@
             <hr style="border: 1px solid #333; margin: 2rem 0;">
 
             <h3>Passo 2: Atributos</h3>
-            <p>Determine os seus seis Atributos (FOR, DES, CON, INT, SAB, CAR). Para garantir um equilíbrio justo e acelerar a criação, use o método de "Array Padrão".</p>
-            <p>Distribua os seguintes valores pelos seus seis atributos, como desejar: <strong>15, 14, 12, 12, 10, 8</strong>.</p>
-            <p>A sua escolha de onde colocar o 15 (para um bónus de +2) e o 8 (para uma penalidade de -1) é a primeira grande decisão da sua "build".</p>
+            <p>Determine os seus seis Atributos (FOR, DES, CON, INT, SAB, CAR). Distribua os seguintes valores pelos seus seis atributos, como desejar: <strong>15, 14, 12, 12, 10, 8</strong>.</p>
             
             <h3>Passo 3: Nível de Protagonista (NP) e Espaços</h3>
             <p>O seu herói começa no <strong>Nível de Protagonista (NP) 1</strong>.</p>
@@ -97,10 +99,28 @@
             <p>Escolha <strong>Complicações</strong> (Ex: "Identidade Secreta", "Vulnerabilidade") para ganhar <strong>PC bónus</strong>. Isto permite-lhe comprar mais Poderes de Esforço de Nível 1.</p>
             
             <h3>Passo 6: Detalhes Finais (Defesas e Perícias)</h3>
-            <p>Finalmente, calcule os seus valores de combate. O mais importante são as suas <strong>Três Defesas</strong>, que substituem a "Classe de Armadura" (CA) do D&D.</p>
-            <p>Para um inimigo o atingir, ele deve rolar um d20 + modificador de ataque e **igualar ou superar** a sua defesa relevante.</p>
+            <p>Finalmente, calcule os seus valores de combate e escolha as suas perícias. Estes são os números que você mais usará em jogo.</p>
             
             <h4>As Três Defesas</h4>
+            <p>Calcule as suas três defesas. A explicação completa do que elas fazem está no **Capítulo 2: Regras do Jogo**.</p>
+            <ul style="list-style-type: disc; padding-left: 1.5rem;">
+                <li><strong>Fortitude (FORT): 10 + Mod. CON</strong></li>
+                <li><strong>Defesa (DEF): 10 + Mod. DES</strong></li>
+                <li><strong>Vontade (VON): 10 + Mod. SAB</strong></li>
+            </ul>
+
+            <h4>Perícias</h4>
+            <p style="margin-top: 1rem;">Escolha as suas Proficiências em Perícias com base na sua Matriz (como descrito no Cap. 3) e no seu conceito. Se você é proficiente numa perícia, você adiciona o seu **Bónus de Proficiência** (que é +2 no NP 1) a qualquer teste feito com ela.</p>
+
+        </div>
+
+        <div id="regras" class="content-section">
+            
+            <h2>Capítulo 2: Regras do Jogo</h2>
+            <p>Este capítulo foca-se na ação: combate, dano e progressão.</p>
+
+            <h3>As Três Defesas</h3>
+            <p>Este sistema não usa a "Classe de Armadura" (CA) do D&D. Em vez disso, cada ataque mira uma das suas **Três Defesas**. Para um inimigo o atingir, ele deve rolar um d20 + modificador de ataque e **igualar ou superar** a sua defesa relevante.</p>
             <ul style="list-style-type: disc; padding-left: 1.5rem;">
                 <li style="margin-bottom: 1rem;">
                     <strong>Fortitude (FORT): 10 + Mod. CON</strong>
@@ -119,16 +139,6 @@
                 </li>
             </ul>
 
-            <h4>Perícias</h4>
-            <p style="margin-top: 1rem;">Escolha as suas Proficiências em Perícias com base na sua Matriz (como descrito no Cap. 3) e no seu conceito. Se você é proficiente numa perícia, você adiciona o seu **Bónus de Proficiência** (que é +2 no NP 1) a qualquer teste feito com ela.</p>
-
-        </div>
-
-        <div id="regras" class="content-section">
-            
-            <h2>Capítulo 2: Regras do Jogo</h2>
-            <p>Este capítulo foca-se na ação: combate, dano e progressão.</p>
-
             <h3>A Trilha de Condição (Substituindo os PV)</h3>
             <p>Este sistema não usa Pontos de Vida. O dano muda o seu estado através da <strong>Trilha de Condição</strong>.</p>
             <ol style="list-style-type: decimal; list-style-position: inside; padding-left: 1rem;">
@@ -137,7 +147,7 @@
                 <li style="margin-bottom: 0.5rem;"><strong>Machucado:</strong> Sofre -3 em rolagens, 1/2 veloc.</li>
                 <li style="margin-bottom: 0.5rem;"><strong>Incapacitado:</strong> Fora de combate.</li>
             </ol>
-            <p>Quando você sofre dano, faz um <strong>Teste de Resistência de Dano</strong> (normalmente CON) contra a CD do Mestre. Se falhar, desce um nível na Trilha e ganha uma <strong>Complicação de Combate</strong> (Ex: "Braço Ferido").</p>
+            <p>Quando você sofre dano, faz um <strong>Teste de Resistência de Dano</strong> (normalmente contra a sua Fortitude) contra a CD do Mestre. Se falhar, desce um nível na Trilha e ganha uma <strong>Complicação de Combate</strong> (Ex: "Braço Ferido").</p>
 
             <h3>Usar Poderes (O Jogo "Esperto")</h3>
             <p>A sua principal preocupação tática em combate será gerir os seus <strong>Espaços de Poder</strong>.</p>

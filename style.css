@@ -5,6 +5,8 @@
 
 /* --- 1. RESET BÁSICO E TEMA DARK --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+/* (CORREÇÃO) O scroll-padding-top agora só precisa de considerar o header principal */
+html { scroll-padding-top: 71px; } 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #121212;
@@ -19,11 +21,26 @@ header {
     border-bottom: 3px solid #00aaff;
     padding: 1.5rem 1rem;
     text-align: center;
+    position: relative; 
 }
-header h1 { color: #00aaff; font-weight: 700; }
-header h1 a { color: inherit; text-decoration: none; }
-header p { color: #aaa; font-style: italic; }
-main { flex: 1; padding: 2rem 1rem; max-width: 900px; margin: 0 auto; width: 100%; }
+/* (NOVO) Contém o header e o botão hambúrguer */
+.header-com-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f1f1f;
+    border-bottom: 3px solid #00aaff;
+    padding: 1rem;
+    position: sticky; /* ESTE É O ÚNICO ELEMENTO FIXO */
+    top: 0;
+    z-index: 300;
+}
+.header-content { text-align: left; }
+.header-content h1 { font-size: 1.5rem; }
+.header-content p { font-size: 0.8rem; color: #aaa; margin: 0; }
+.header-content h1 a { color: inherit; text-decoration: none; }
+
+main { flex: 1; padding: 1rem; max-width: 900px; margin: 0 auto; width: 100%; }
 footer { text-align: center; padding: 2rem; color: #777; border-top: 1px solid #333; margin-top: auto; }
 h2 { color: #00aaff; border-bottom: 2px solid #555; padding-bottom: 0.5rem; margin-bottom: 1rem; font-size: 1.8rem; }
 h3 { color: #eee; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.4rem; }
@@ -35,7 +52,7 @@ blockquote { background-color: #1a1a1a; border-left: 5px solid #00aaff; padding:
 hr { border: 1px solid #333; margin: 2rem 0; }
 
 /* --- 2. PÁGINA INICIAL (index.html) --- */
-.home-header { padding: 3rem 1rem; }
+.home-header { padding: 3rem 1rem; display: block; position: static; } /* Reseta o estilo do header-com-menu */
 .home-main { text-align: center; }
 .nav-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
 .nav-card {
@@ -59,10 +76,8 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     justify-content: center;
     background: #1f1f1f;
     border-bottom: 1px solid #333;
-    position: sticky;
-    top: 0;
-    z-index: 200;
-    flex-wrap: wrap;
+    /* --- (CORREÇÃO) REMOVIDO "position: sticky" e "top: 71px" --- */
+    /* --- (CORREÇÃO) REMOVIDO "z-index: 200" --- */
 }
 .sub-nav-btn {
     background: none;
@@ -73,6 +88,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     font-size: 1rem;
     border-bottom: 3px solid transparent;
     transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
 }
 .sub-nav-btn:hover { color: #fff; }
 .sub-nav-btn.active { color: #00aaff; border-bottom-color: #00aaff; font-weight: 600; }
@@ -90,15 +106,19 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     overflow: hidden;
 }
-.wizard-step { display: none; padding: 2rem 2.5rem; }
+/* (CORREÇÃO DO BUG) O margin-top já não é necessário */
+.wizard-step h2 {
+    /* margin-top: 1rem; <- REMOVIDO */
+}
+.wizard-step { display: none; padding: 1.5rem; }
 .wizard-step.active { display: block; }
+
 #pp-tracker-container {
     background: #181818;
     padding: 1rem;
     text-align: center;
-    position: sticky;
-    top: 55px; /* Altura da sub-nav */
-    z-index: 100;
+    /* --- (CORREÇÃO) REMOVIDO "position: sticky" e "top: 126px" --- */
+    /* --- (CORREÇÃO) REMOVIDO "z-index: 100" --- */
     border-bottom: 1px solid #333;
 }
 .pp-tracker { font-size: 1.2rem; font-weight: 600; }
@@ -119,7 +139,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
 .matriz-card.selected { background-color: #1c3d50; border-color: #00aaff; border-width: 3px; }
 .matriz-card h3 { margin: 0 0 0.5rem 0; color: #00aaff; }
 
-/* Passo 2: Lista de Poderes (Wizard) - (ESTILO DE CARTÃO PROFISSIONAL) */
+/* Passo 2: Lista de Poderes (Wizard) */
 .power-level-header {
     font-size: 1.5rem;
     color: #00aaff;
@@ -157,14 +177,14 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     display: flex;
     align-items: center;
     margin-left: 1rem;
-    flex-shrink: 0; /* Impede que o botão encolha */
+    flex-shrink: 0;
 }
 .poder-card-stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem; /* Mais espaço */
+    gap: 1.5rem;
     background: #222;
-    padding: 0.75rem 1rem; /* Um pouco mais de padding */
+    padding: 0.75rem 1rem;
     font-size: 0.85rem;
     border-bottom: 1px solid #444;
 }
@@ -175,7 +195,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     font-size: 0.95rem;
 }
 .poder-card-desc p { margin-bottom: 0.5rem; }
-.ranks-superiores { /* Agora usado para "Upcast" */
+.ranks-superiores {
     font-style: italic;
     color: #aaa;
     margin-top: 1rem;
@@ -210,7 +230,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2.5rem;
+    padding: 1rem 1.5rem;
     background: #2a2a2a;
     border-top: 1px solid #333;
 }
@@ -240,7 +260,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     color: #fff;
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
-    white-space: nowrap; /* Impede que o texto do botão quebre */
+    white-space: nowrap;
 }
 .btn-add:hover { background-color: #00aaff; }
 
@@ -258,13 +278,13 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     color: #00aaff;
     border-bottom: 1px solid #333;
     font-size: 1.8rem;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     background: #222;
 }
 .matriz-reference-entry > p,
 .matriz-reference-entry > strong,
 .matriz-reference-entry > .habilidades-iniciais {
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 .matriz-reference-entry > .power-level-header {
     color: #eee;
@@ -272,7 +292,7 @@ hr { border: 1px solid #333; margin: 2rem 0; }
     margin-bottom: 0;
     font-size: 1.3rem;
     border-top: 1px solid #444;
-    padding: 1.5rem 2rem 1rem 2rem;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
     background: #222;
 }
 
@@ -284,22 +304,23 @@ hr { border: 1px solid #333; margin: 2rem 0; }
 .poder-card-ref:last-child { border-bottom: none; }
 .poder-card-ref .poder-card-header {
     background: none;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 .poder-card-ref .poder-card-header strong { font-size: 1.1rem; color: #eee; }
 .poder-card-ref .poder-card-header span { font-size: 0.9rem; color: #00ffaa; font-weight: 600; }
 .poder-card-ref .poder-card-stats {
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     background: #222;
     font-size: 0.85rem;
 }
-.poder-card-ref .poder-card-desc { padding: 0.5rem 2rem 1.5rem 2rem; }
+.poder-card-ref .poder-card-desc { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
 
 /* Tabela de Referência (Usada no mestre.html) */
 .reference-table {
@@ -321,4 +342,132 @@ hr { border: 1px solid #333; margin: 2rem 0; }
 }
 .reference-table td {
     font-size: 0.95rem;
+}
+
+/* --- 8. REGRAS DE RESPONSIVIDADE (MENU POPUP) --- */
+
+/* Botões do Menu Popup (Hambúrguer e Fechar) */
+.hamburger-menu {
+    display: none; /* Escondido em desktop */
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #00aaff;
+    cursor: pointer;
+}
+.close-menu-btn {
+    display: none; /* Escondido em desktop */
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    
+    /* Ajustes no Layout Principal */
+    main {
+        padding: 1rem 0.5rem;
+    }
+    
+    /* (NOVO) Mostra o botão Hambúrguer */
+    .hamburger-menu {
+        display: block;
+    }
+    
+    /* (NOVO) Transforma o .sub-nav num Popup */
+    .sub-nav {
+        display: none; /* Escondido por defeito em mobile */
+        position: fixed; /* Cobre o ecrã todo */
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(18, 18, 18, 0.95); /* Fundo escuro com transparência */
+        flex-direction: column; /* Empilha os botões */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+    }
+    .sub-nav.open {
+        display: flex; /* Mostra o menu quando "aberto" */
+    }
+    
+    /* (NOVO) Botões do Menu Popup */
+    .sub-nav-btn {
+        font-size: 1.5rem;
+        padding: 1.5rem;
+        border-bottom: 1px solid #333;
+        width: 80%;
+        text-align: center;
+    }
+    .sub-nav-btn.active {
+        border-bottom-color: #00aaff; /* Mantém a cor da aba ativa */
+    }
+    .close-menu-btn {
+        display: block; /* Mostra o botão "X" no popup */
+    }
+
+    /* 2. Correção das Tabelas */
+    div.content-section table.reference-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* 3. Ajustes no Assistente */
+    .wizard-step {
+        padding: 1.5rem 1rem; /* Menos padding lateral */
+    }
+    .wizard-nav {
+        padding: 1rem;
+    }
+    /* (CORREÇÃO DO BUG) O tracker já não é sticky, por isso não precisa de 'top' */
+    #pp-tracker-container {
+        /* top: 71px; <- REMOVIDO */
+    }
+
+    /* 4. Ajustes nos Cartões de Poder */
+    .poder-card-header {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap; /* Permite que o botão quebre a linha */
+    }
+    .item-poder-controls {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+    .btn-add {
+        width: 100%; /* Botão de adicionar ocupa a largura toda */
+    }
+    .poder-card-stats {
+        padding: 0.75rem 1rem;
+        gap: 1rem;
+    }
+    .poder-card-desc {
+        padding: 1rem;
+    }
+    .matriz-reference-entry > p,
+    .matriz-reference-entry > strong,
+    .matriz-reference-entry > .habilidades-iniciais {
+        padding: 0 1rem;
+    }
+    .matriz-reference-entry > h4 {
+        padding: 1.5rem 1rem 1rem 1rem;
+    }
+    .poder-card-ref .poder-card-header {
+        padding: 1rem 1rem;
+    }
+    .poder-card-ref .poder-card-stats {
+        padding: 0.5rem 1rem;
+    }
+    .poder-card-ref .poder-card-desc {
+        padding: 0.5rem 1rem 1.5rem 1rem;
+    }
 }
